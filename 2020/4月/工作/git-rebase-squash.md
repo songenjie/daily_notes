@@ -10,14 +10,14 @@ cherry-pick mr
 
 ### 2 rebase 
 1. git rebase -i HEAD~n
-2. 或者 git rebase -i 所有合并的commit id
+2. 或者 git rebase -i 所有合并的commit id  之前
 
 ### 3 chang 
 除了第一个pick
-pick -> squash 
+其他commit pick -> squash 
 
 ### 4 commit
-晚上commit 信息
+完善 commit 信息
 
 ### 5 push 
 推送
