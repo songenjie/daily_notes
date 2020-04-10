@@ -1,0 +1,51 @@
+-今天无意发现在Linux上计算md5哈希值和在MacOS不太一样:
+-Linux:
+-
+-[root@lab ~]# echo '123456' |  md5sum  
+-f447b20a7fcbf53a5d5be013ea0b15af  -
+-Mac:
+-
+-[LiangZhang@MacBook Notes]$md5  -s 123456   
+-MD5 ("123456") = e10adc3949ba59abbe56e057f20f883e
+-仔细折腾一下, 原来是echo输出的字符串会默认添加一个换行符'\n',
+-所以在Linux上计算纯字符串(不含换行符)的hash值需要以下方法:
+-
+-echo -n 可以去掉换行符:
+-[root@lab ~]# echo -n '123456' | md5sum
+-e10adc3949ba59abbe56e057f20f883e  -
+-
+-printf 没有换行符结尾:
+-[root@lab ~]# printf 123456 | md5sum 
+-e10adc3949ba59abbe56e057f20f883e  -
+-
+-tr可以删掉一个字符，如 tr -d '\n'  :
+-[root@lab ~]# echo '123456' | tr -d '\n' | md5sum
+-e10adc3949ba59abbe56e057f20f883e  -
+-
+-作者：markict
+-链接：https://www.jianshu.com/p/5f4e0f8e8ad8
+-来源：简书
+-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。今天无意发现在Linux上计算md5哈希值和在MacOS不太一样:
+-Linux:
+-
+-[root@lab ~]# echo '123456' |  md5sum  
+-f447b20a7fcbf53a5d5be013ea0b15af  -
+-Mac:
+-
+-[LiangZhang@MacBook Notes]$md5  -s 123456   
+-MD5 ("123456") = e10adc3949ba59abbe56e057f20f883e
+-仔细折腾一下, 原来是echo输出的字符串会默认添加一个换行符'\n',
+-所以在Linux上计算纯字符串(不含换行符)的hash值需要以下方法:
+-
+-echo -n 可以去掉换行符:
+-[root@lab ~]# echo -n '123456' | md5sum
+-e10adc3949ba59abbe56e057f20f883e  -
+-
+-printf 没有换行符结尾:
+-[root@lab ~]# printf 123456 | md5sum 
+-e10adc3949ba59abbe56e057f20f883e  -
+-
+-tr可以删掉一个字符，如 tr -d '\n'  :
+-[root@lab ~]# echo '123456' | tr -d '\n' | md5sum
+-e10adc3949ba59abbe56e057f20f883e  -
+-
