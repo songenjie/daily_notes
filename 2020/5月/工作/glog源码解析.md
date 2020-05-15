@@ -12,7 +12,7 @@
 
 
 ### 1. 整体结构
-- [整体结构](/source/glog-uml.png)
+- [整体结构](/source/glog_uml.png)
 1. LogMessage:日志库的接口部分，在前面已经见到过了。提供了多个构造函数，在析构时调用Flush写入日志数据。也就是每次LOG(xxx)的调用都会生成一个LogMessage对象。同时对象记录了写入日志数据的函数指针：send_method，其中数据的存储和写入日志都委托给LogMessageData完成。
 
 2. LogMessageData：记录日志数据例如文件名、日志消息、日志级别、行号、时间等,同时调用LogDestination的静态方法组织数据的写入。
