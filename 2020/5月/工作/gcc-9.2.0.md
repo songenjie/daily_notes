@@ -1,0 +1,19 @@
+-cd /home/build
+-GCC_VERSION=9.2.0
+-#http://ftp.gnu.org/gnu/gcc/
+-#https://mirrors.ustc.edu.cn/gnu/gcc/(国内)
+-
+-wget https://mirrors.ustc.edu.cn/gnu/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.gz
+-tar xzvf gcc-${GCC_VERSION}.tar.gz
+-mkdir obj.gcc-${GCC_VERSION}
+-cd gcc-${GCC_VERSION}
+-
+-vim ./contrib/download_prerequisites 将数据元 ftp -> https
+-
+-./contrib/download_prerequisites
+-cd ../obj.gcc-${GCC_VERSION}
+-../gcc-${GCC_VERSION}/configure --disable-multilib --enable-languages=c,c++
+-make -j $(nproc)
+-make install
+-
+-
