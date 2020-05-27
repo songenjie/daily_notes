@@ -1,0 +1,97 @@
+CREATE TABLE shard_01.localtable
+(
+    EventDate DateTime,
+    CounterID UInt32,
+    UserID UInt32
+) ENGINE = ReplicatedMergeTree('/clickhouse/jdolap_ck_01/shard_01/localtable', 'replica_01')
+ORDER BY (CounterID, intHash32(UserID))
+SAMPLE BY intHash32(UserID);
+
+CREATE TABLE shard_02.localtable
+(
+    EventDate DateTime,
+    CounterID UInt32,
+    UserID UInt32
+) ENGINE = ReplicatedMergeTree('/clickhouse/jdolap_ck_01/shard_02/localtable', 'replica_03')
+ORDER BY (CounterID, intHash32(UserID))
+SAMPLE BY intHash32(UserID);
+
+CREATE TABLE shard_03.localtable
+(
+    EventDate DateTime,
+    CounterID UInt32,
+    UserID UInt32
+) ENGINE = ReplicatedMergeTree('/clickhouse/jdolap_ck_01/shard_03/localtable', 'replica_02')
+ORDER BY (CounterID, intHash32(UserID))
+SAMPLE BY intHash32(UserID);
+
+
+
+
+CREATE TABLE shard_01.localtable
+(
+    EventDate DateTime,
+    CounterID UInt32,
+    UserID UInt32
+) ENGINE = ReplicatedMergeTree('/clickhouse/jdolap_ck_01/shard_01/localtable', 'replica_02')
+ORDER BY (CounterID, intHash32(UserID))
+SAMPLE BY intHash32(UserID);
+
+CREATE TABLE shard_02.localtable
+(
+    EventDate DateTime,
+    CounterID UInt32,
+    UserID UInt32
+) ENGINE = ReplicatedMergeTree('/clickhouse/jdolap_ck_01/shard_02/localtable', 'replica_01')
+ORDER BY (CounterID, intHash32(UserID))
+SAMPLE BY intHash32(UserID);
+
+CREATE TABLE shard_03.localtable
+(
+    EventDate DateTime,
+    CounterID UInt32,
+    UserID UInt32
+) ENGINE = ReplicatedMergeTree('/clickhouse/jdolap_ck_01/shard_03/localtable', 'replica_03')
+ORDER BY (CounterID, intHash32(UserID))
+SAMPLE BY intHash32(UserID);
+
+
+
+
+CREATE TABLE shard_01.localtable
+(
+    EventDate DateTime,
+    CounterID UInt32,
+    UserID UInt32
+) ENGINE = ReplicatedMergeTree('/clickhouse/jdolap_ck_01/shard_01/localtable', 'replica_03')
+ORDER BY (CounterID, intHash32(UserID))
+SAMPLE BY intHash32(UserID);
+
+CREATE TABLE shard_02.localtable
+(
+    EventDate DateTime,
+    CounterID UInt32,
+    UserID UInt32
+) ENGINE = ReplicatedMergeTree('/clickhouse/jdolap_ck_01/shard_02/localtable', 'replica_02')
+ORDER BY (CounterID, intHash32(UserID))
+SAMPLE BY intHash32(UserID);
+
+CREATE TABLE shard_03.localtable
+(
+    EventDate DateTime,
+    CounterID UInt32,
+    UserID UInt32
+) ENGINE = ReplicatedMergeTree('/clickhouse/jdolap_ck_01/shard_03/localtable', 'replica_01')
+ORDER BY (CounterID, intHash32(UserID))
+SAMPLE BY intHash32(UserID);
+
+
+
+
+CREATE TABLE IF NOT EXISTS localtable_dis(
+   CounterID UInt32,
+   UserID UInt32)
+ENGINE = Distributed(jdolap_ck_01, '', localtable, rand());
+ORDER BY (CounterID, intHash32(UserID))
+SAMPLE BY intHash32(UserID);
+
