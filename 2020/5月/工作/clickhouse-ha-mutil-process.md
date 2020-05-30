@@ -416,4 +416,10 @@ clickhouse by muti process
 - 部署相对复杂, 每个进程配置都不相同
 - Distributed 表也需要建 总的副本数据,也即是进程数,是 click-ha by database 的三倍 
 
-
+SELECT
+    name,
+    path,
+    formatReadableSize(free_space) AS free,
+    formatReadableSize(total_space) AS total,
+    formatReadableSize(keep_free_space) AS reserved
+FROM system.disks;
