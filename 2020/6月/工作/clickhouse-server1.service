@@ -1,0 +1,19 @@
+[Unit]
+Description=ClickHouse Server (analytic DBMS for big data)
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=clickhouse
+Group=clickhouse
+Restart=always
+RestartSec=30
+RuntimeDirectory=clickhouse-server
+ExecStart=/data0/jason/clickhouse/lib/clickhouse server  --config=/data0/jason/clickhouse/conf/config.xml --pid-file=/data0/jason/clickhouse/bin/clickhouse-server.pid
+LimitCORE=infinity
+LimitNOFILE=500000
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_IPC_LOCK CAP_SYS_NICE
+
+[Install]
+WantedBy=multi-user.target
