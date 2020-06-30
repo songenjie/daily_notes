@@ -508,6 +508,10 @@ SETTINGS storage_policy = 'jdob_ha';
 
 
 - copier 执行
+https://github.com/ClickHouse/ClickHouse/blob/master/docs/en/operations/utilities/clickhouse-copier.md
+https://www.jianshu.com/p/40402320b631
+https://clickhouse.tech/docs/en/operations/utilities/clickhouse-copier/
+
 ```
 ./clickhouse copier  --config zookeeper.xml  --task-file schema.xml  --base-dir='/data2/jdolap/clickhouse/lib' --task-path='/data2/jdolap/clickhouse/lib11'
 --daemon 就是后台运行 数据量大可以
