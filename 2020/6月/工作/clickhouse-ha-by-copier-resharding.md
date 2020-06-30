@@ -2,7 +2,7 @@
 
 #### 1 ha 方法
 
-![ha-group](/source/clickhouse-ha-by-group.jpg)
+![ha-group](/source/clickhouse-ha-group.jpg)
 
 #### 2 mult disk 3 process at 1 node
 
