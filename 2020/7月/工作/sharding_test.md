@@ -1,4 +1,4 @@
-```
+```c++
 CREATE TABLE jason.table4 on cluster ck_06
 (
   `EventDate` DateTime, 
