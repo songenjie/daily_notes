@@ -331,6 +331,8 @@ SELECT
 FROM UAct_version
 GROUP BY UserID
 HAVING sum(Sign) > 0;
+
+
 ┌──────────────UserID─┬─PageViews─┬─Duration─┐
 │ 4324182021466249494 │         6 │      185 │
 └─────────────────────┴───────────┴──────────┘
@@ -487,8 +489,8 @@ CREATE TABLE agg_table
 (   CounterID UInt8,
     StartDate Date,
     UserID AggregateFunction(uniq, UInt64)
-) ENGINE = AggregatingMergeTree() 
-PARTITION BY toYYYYMM(StartDate) 
+) ENGINE = AggregatingMergeTree()
+PARTITION BY toYYYYMM(StartDate)
 ORDER BY (CounterID, StartDate);
 
 -- 从明细表中读取数据，插入聚合表。
