@@ -640,7 +640,7 @@
                     <hot>
                         <disk>disk0</disk>
                         <disk>disk1</disk>
-			<max_data_part_size_bytes>3298534883328</max_data_part_size_bytes>
+			                  <max_data_part_size_bytes>3298534883328</max_data_part_size_bytes>
                     </hot>
                     <cold>
                         <disk>disk6</disk>
