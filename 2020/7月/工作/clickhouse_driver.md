@@ -40,8 +40,6 @@ https://github.com/blynkkk/clickhouse4j
 
 [eg2](http://www.clickhouse.com.cn/topic/5bfeb08653dd87ca52effcc3)
 
-
-
 ### jave client
 
 - water drop
