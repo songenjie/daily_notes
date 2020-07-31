@@ -179,7 +179,7 @@ PV,UV 计算效率>Doris
 
 8 存储
 
-![结构](/source/clickhouse_storage1.png)
+![结构](/source/clickhouse_storage1.jpg)
 
 
 
@@ -210,7 +210,7 @@ PV,UV 计算效率>Doris
 
 ### 写入流程
 
-![写入流程](/source/clickhouse_table_storage.png)
+![写入流程](/source/clickhouse_table_storage.jpg)
 
 
 
@@ -240,7 +240,7 @@ PV,UV 计算效率>Doris
 
 ### 系统架构
 
-![系统架构](/source/prometheus_alll_monitor.png)
+![系统架构](/source/prometheus_alll_monitor.jpg)
 
 
 
