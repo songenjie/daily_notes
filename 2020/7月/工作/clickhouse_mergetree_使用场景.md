@@ -174,6 +174,10 @@ select * from test_tbl_replacing;
 
 因此ReplacingMergeTree更多被用于确保数据最终被去重，而无法保证查询过程中主键不重复。
 
+
+
+
+
 ### CollapsingMergeTree
 
 ClickHouse实现了CollapsingMergeTree来消除ReplacingMergeTree的限制。该引擎要求在建表语句中指定一个标记列Sign，后台Compaction时会将主键相同、Sign相反的行进行折叠，也即删除。

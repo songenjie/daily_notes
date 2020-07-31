@@ -1,44 +1,44 @@
-- [clickhouse VS Apache Doris](/source#clickhousevsdoris功能对比-clickhouseVSApacheDoris)
-  - [1 系统架构](/source#clickhousevsdoris功能对比-1系统架构)
-    - [1.1 What is clickhouse](/source#clickhousevsdoris功能对比-1.1Whatisclickhouse)
-    - [真正的列式数据库。 没有任何内容与值一起存储。例如，支持常量长度值，以避免将它们的长度“ number”存储在值的旁边。](/source#clickhousevsdoris功能对比-真正的列式数据库。没有任何内容与值一起存储。例如，支持常量长度值，以避免将它们的长度“number”存储在值的旁边。)
-    - [1.2 What is Doris](/source#clickhousevsdoris功能对比-1.2WhatisDoris)
-  - [2 数据模型](/source#clickhousevsdoris功能对比-2数据模型)
-    - [2.1 Clickhouse聚合模型](/source#clickhousevsdoris功能对比-2.1Clickhouse聚合模型)
-    - [2.2 Doris的聚合模型](/source#clickhousevsdoris功能对比-2.2Doris的聚合模型)
-    - [2.3 Clickhouse VS Doris RollUp](/source#clickhousevsdoris功能对比-2.3ClickhouseVSDorisRollUp)
-    - [2.4 Doris的明细模型](/source#clickhousevsdoris功能对比-2.4Doris的明细模型)
-  - [3 存储引擎](/source#clickhousevsdoris功能对比-3存储引擎)
-    - [Clickhouse存储引擎：](/source#clickhousevsdoris功能对比-Clickhouse存储引擎：)
-    - [Doris存储引擎：](/source#clickhousevsdoris功能对比-Doris存储引擎：)
-  - [4 数据导入](/source#clickhousevsdoris功能对比-4数据导入)
-    - [Clickhouse数据导入：](/source#clickhousevsdoris功能对比-Clickhouse数据导入：)
-    - [Doris数据导入：](/source#clickhousevsdoris功能对比-Doris数据导入：)
-  - [5 查询](/source#clickhousevsdoris功能对比-5查询)
-    - [Clickhouse查询：](/source#clickhousevsdoris功能对比-Clickhouse查询：)
-    - [Doris查询：](/source#clickhousevsdoris功能对比-Doris查询：)
-  - [6 精确去重](/source#clickhousevsdoris功能对比-6精确去重)
-    - [Clickhouse的精确去重：](/source#clickhousevsdoris功能对比-Clickhouse的精确去重：)
-    - [Doris的精确去重：](/source#clickhousevsdoris功能对比-Doris的精确去重：)
-  - [7 元数据](/source#clickhousevsdoris功能对比-7元数据)
-    - [Clickhouse的元数据 ：](/source#clickhousevsdoris功能对比-Clickhouse的元数据：)
-    - [Doris的元数据：](/source#clickhousevsdoris功能对比-Doris的元数据：)
-  - [8 高性能](/source#clickhousevsdoris功能对比-8高性能)
-    - [Why Clickhouse Query Fast：](/source#clickhousevsdoris功能对比-WhyClickhouseQueryFast：)
-    - [Why Doris Query Fast：](/source#clickhousevsdoris功能对比-WhyDorisQueryFast：)
-  - [9 高可用](/source#clickhousevsdoris功能对比-9高可用)
-    - [Clickhouse高可用：](/source#clickhousevsdoris功能对比-Clickhouse高可用：)
-    - [Doris高可用：](/source#clickhousevsdoris功能对比-Doris高可用：)
-  - [10 可维护性](/source#clickhousevsdoris功能对比-10可维护性)
-    - [10.1 部署](/source#clickhousevsdoris功能对比-10.1部署)
-    - [10.2 运维](/source#clickhousevsdoris功能对比-10.2运维)
-  - [11 易用性](/source#clickhousevsdoris功能对比-11易用性)
-    - [11.1 查询接入](/source#clickhousevsdoris功能对比-11.1查询接入)
-    - [11.2 学习成本](/source#clickhousevsdoris功能对比-11.2学习成本)
-    - [11.3 Schema Change](/source#clickhousevsdoris功能对比-11.3SchemaChange)
-  - [12 功能](/source#clickhousevsdoris功能对比-12功能)
-  - [13 社区和生态](/source#clickhousevsdoris功能对比-13社区和生态)
-  - [14 总结](/source#clickhousevsdoris功能对比-14总结)
+- [clickhouse VS Apache Doris](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-clickhouseVSApacheDoris)
+  - [1 系统架构](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-1系统架构)
+    - [1.1 What is clickhouse](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-1.1Whatisclickhouse)
+    - [真正的列式数据库。 没有任何内容与值一起存储。例如，支持常量长度值，以避免将它们的长度“ number”存储在值的旁边。](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-真正的列式数据库。没有任何内容与值一起存储。例如，支持常量长度值，以避免将它们的长度“number”存储在值的旁边。)
+    - [1.2 What is Doris](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-1.2WhatisDoris)
+  - [2 数据模型](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-2数据模型)
+    - [2.1 Clickhouse聚合模型](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-2.1Clickhouse聚合模型)
+    - [2.2 Doris的聚合模型](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-2.2Doris的聚合模型)
+    - [2.3 Clickhouse VS Doris RollUp](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-2.3ClickhouseVSDorisRollUp)
+    - [2.4 Doris的明细模型](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-2.4Doris的明细模型)
+  - [3 存储引擎](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-3存储引擎)
+    - [Clickhouse存储引擎：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Clickhouse存储引擎：)
+    - [Doris存储引擎：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Doris存储引擎：)
+  - [4 数据导入](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-4数据导入)
+    - [Clickhouse数据导入：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Clickhouse数据导入：)
+    - [Doris数据导入：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Doris数据导入：)
+  - [5 查询](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-5查询)
+    - [Clickhouse查询：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Clickhouse查询：)
+    - [Doris查询：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Doris查询：)
+  - [6 精确去重](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-6精确去重)
+    - [Clickhouse的精确去重：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Clickhouse的精确去重：)
+    - [Doris的精确去重：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Doris的精确去重：)
+  - [7 元数据](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-7元数据)
+    - [Clickhouse的元数据 ：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Clickhouse的元数据：)
+    - [Doris的元数据：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Doris的元数据：)
+  - [8 高性能](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-8高性能)
+    - [Why Clickhouse Query Fast：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-WhyClickhouseQueryFast：)
+    - [Why Doris Query Fast：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-WhyDorisQueryFast：)
+  - [9 高可用](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-9高可用)
+    - [Clickhouse高可用：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Clickhouse高可用：)
+    - [Doris高可用：](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-Doris高可用：)
+  - [10 可维护性](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-10可维护性)
+    - [10.1 部署](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-10.1部署)
+    - [10.2 运维](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-10.2运维)
+  - [11 易用性](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-11易用性)
+    - [11.1 查询接入](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-11.1查询接入)
+    - [11.2 学习成本](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-11.2学习成本)
+    - [11.3 Schema Change](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-11.3SchemaChange)
+  - [12 功能](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-12功能)
+  - [13 社区和生态](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-13社区和生态)
+  - [14 总结](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-14总结)
 
 
 
@@ -82,11 +82,11 @@ o  可以进行并行和分布式查询处理（包括[JOIN](https://zh.wikipedi
 
 Doris是一个MPP的OLAP系统，主要整合了Google Mesa（数据模型），Apache Impala（MPP Query Engine)和Apache ORCFile (存储格式，编码和压缩) 的技术。
 
-![img](/source/1.jpeg?version=1&modificationDate=1585282814000&api=v2)
+![img](https://cf.jd.com/download/attachments/275476811/1.jpeg?version=1&modificationDate=1585282814000&api=v2)
 
 Doris的系统架构如下，Doris主要分为FE和BE两个组件，FE主要负责查询的编译，分发和元数据管理（基于内存，类似HDFS NN）；BE主要负责查询的执行和存储系统。
 
-![img](/source/2.jpeg?version=1&modificationDate=1585282888000&api=v2)
+![img](https://cf.jd.com/download/attachments/275476811/2.jpeg?version=1&modificationDate=1585282888000&api=v2)
 
 ## **2** **数据模型**
 
@@ -280,3 +280,266 @@ LOADING阶段主要完成以下工作：
 - 进行数据的格式转换，生成索引
 
 LOADING完成后会进行元数据的更新。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## **5** **查询**
+
+
+
+### **![img](https://cf.jd.com/download/thumbnails/275476811/image2020-3-27_12-15-28.png?version=1&modificationDate=1585282528000&api=v2) Clickhouse****查询：**
+
+
+
+
+
+
+
+前面说过，ClickHouse集群的每一个ClickHouse实例都知道完整的集群拓扑结构(每一个ClickHouse实例上都有一个Distibute引擎实例)，所以客户端可以接入任何一个ClickHouse实例，进行分发表数据读取
+
+在all表上读数据时CH数据流程如下：
+
+1.分发SQL到对应多个shard上执行SQL。
+
+(Distribute引擎会选择每个分发到的Shard中的”健康的”副本执行SQL)
+
+(所谓健康的广义上来说就是存货的，当前负载小的)
+
+2.执行SQL后的数据的中间结果发送到主server上
+
+(主Server就是接受到客户端查询命令的那台ClickHouse实例)
+
+3.数据再次汇总过滤，然后返回给客户端
+
+
+
+
+
+
+
+### **Doris****查询：**
+
+![img](https://cf.jd.com/download/attachments/275476811/image2020-3-27_12-17-44.png?version=1&modificationDate=1585282665000&api=v2)
+
+Doris的查询引擎使用的是Impala，是MPP架构。Doris的FE 主要负责SQL的解析，语法分析，查询计划的生成和优化。查询计划的生成主要分为两步：
+
+- 生成单节点查询计划 （上图左下角）
+- 将单节点的查询计划分布式化，生成PlanFragment（上图右半部分）
+
+第一步主要包括Plan Tree的生成，谓词下推， Table Partitions pruning，Column projections，Cost-based优化等；第二步 将单节点的查询计划分布式化，分布式化的目标是**最小化数据移动和最大化本地Scan**，分布式化的方法是增加ExchangeNode，执行计划树会以ExchangeNode为边界拆分为PlanFragment，1个PlanFragment封装了在一台机器上对同一数据集的部分PlanTree。如上图所示：各个Fragment的数据流转和最终的结果发送依赖：DataSink。
+
+当FE生成好查询计划树后，BE对应的各种Plan Node（Scan, Join, Union, Aggregation, Sort等）执行自己负责的操作即可。
+
+## **6** **精确去重**
+
+### **Clickhouse****的精确去重：**
+
+Clickhouse的精确去重是基于ReplacingMergeTree实现的基于预计算的精确去重。
+
+### **Doris****的精确去重：**
+
+Doris的精确去重是现场精确去重，Doris计算精确去重时会拆分为两步：
+
+- 按照所有的group by 字段和精确去重的字段进行聚合
+- 按照所有的group by 字段进行聚合
+
+SELECT a, COUNT(DISTINCT b, c), MIN(d), COUNT(*) FROM T GROUP BY a
+
+\* - 1st phase grouping exprs: a, b, c
+
+\* - 1st phase agg exprs: MIN(d), COUNT(*)
+
+\* - 2nd phase grouping exprs: a
+
+\* - 2nd phase agg exprs: COUNT(*), MIN(<MIN(d) from 1st phase>), SUM(<COUNT(*) from 1st phase>)
+
+下面是个简单的等价转换的例子：
+
+select count(distinct lo_ordtotalprice) from ssb_sf20.v2_lineorder;
+
+
+
+select count(*) from (select count(*) from ssb_sf20.v2_lineorder group by lo_ordtotalprice) a;
+
+Doris现场精确去重计算性能和**去重列的基数**、**去重指标个数**、**过滤后的数据大小**成**负相关**；
+
+## **7** **元数据**
+
+### **Clickhouse****的元数据** ：
+
+Clickhouse的元数据是利用zookeeper存储的，可以很好地横向扩展。同时基于内存缓存。
+
+
+
+
+
+### **Doris****的元数据**：
+
+Doris的元数据是基于内存的，这样做的好处是性能很好且不需要额外的系统依赖。 缺点是单机的内存是有限的，扩展能力受限，但是根据Doris开发者的反馈，由于Doris本身的元数据不多，所以元数据本身占用的内存不是很多，目前用大内存的物理机，应该可以支撑数百台机器的OLAP集群。 此外，OLAP系统和HDFS这种分布式存储系统不一样，我们部署多个集群的运维成本和1个集群区别不大。
+
+关于Doris元数据的具体原理大家可以参考Doris官方文档Doris 元数据设计文档
+
+## **8** **高性能**
+
+### **Why Clickhouse Query Fast****：**
+
+
+
+l **数据压缩：**在一些列式数据库管理系统中(例如：InfiniDB CE 和 MonetDB) 并没有使用数据压缩。但是, 若想达到比较优异的性能，数据压缩确实起到了至关重要的作用。
+
+l **多核心并行处理：**ClickHouse会使用服务器上一切可用的资源，从而以最自然的方式并行处理大型查询。
+
+l **多服务器分布式处理[:](https://clickhouse.tech/docs/zh/introduction/distinctive_features/#duo-fu-wu-qi-fen-bu-shi-chu-li)**上面提到的列式数据库管理系统中，几乎没有一个支持分布式的查询处理。
+在ClickHouse中，数据可以保存在不同的shard上，每一个shard都由一组用于容错的replica组成，查询可以并行地在所有shard上进行处理。这些对用户来说是透明的
+
+l **向量引擎[:](https://clickhouse.tech/docs/zh/introduction/distinctive_features/#xiang-liang-yin-qing)**为了高效的使用CPU，数据不仅仅按列存储，同时还按向量(列的一部分)进行处理，这样可以更加高效地使用CPU。
+
+l 列式存储+**索引:**按照主键对数据进行排序，这将帮助ClickHouse在几十毫秒以内完成对数据特定值或范围的查找。
+
+
+
+
+
+
+
+
+
+### **Why Doris Query Fast****：**
+
+l In-Memory Metadata。 Doris的元数据就在内存中，元数据访问速度很快。
+
+l 聚合模型可以在数据导入时进行预聚合。
+
+l 和Kylin一样，也支持预计算的RollUp Table。
+
+l MPP的查询引擎。
+
+l 向量化执行。 相比Kylin中Calcite的代码生成，向量化执行在处理高并发的低延迟查询时性能更好，**Kylin的代码生成本身可能会花费几十ms甚至几百ms**。
+
+l 列式存储 + 前缀索引。
+
+## **9** **高可用**
+
+### **Clickhouse****高可用：**
+
+
+
+**Zookeeper****的高可用**：
+
+**Clickhouse** **引擎的高可用：通过多副本，**
+
+
+
+### **Doris****高可用：**
+
+
+
+**Doris FE****的高可用**： Doris FE的高可用主要基于BerkeleyDB java version实现，BDB-JE实现了**类Paxos一致性协议算法**。
+
+**Doris BE****的高可用：** Doris会保证每个Tablet的多个副本分配到不同的BE上，所以一个BE down掉，不会影响查询的可用性。
+
+## **10** **可维护性**
+
+### **10.1** **部署**
+
+**Clickhouse****部署**：直接部署Clickhouse 运行程序和zookeeper。
+
+**Doris****部署**： 直接部署FE和BE组件即可。
+
+### **10.2** **运维**
+
+**clickhouse****运维：** 只需要理解和掌握系统本身即可。
+
+**Doris****运维：** Doris只需要理解和掌握系统本身即可。
+
+**10.3** **客服**
+
+**Clickhouse****客服：**需要教会分布式表和ReplicatedMergeTree引擎；
+
+**Doris** **客服：** 需要教会用户聚合模型，明细模型，前缀索引，RollUp表这些概念。
+
+## **11** **易用性**
+
+### **11.1** **查询接入**
+
+**Clickhouse****查询接入**：Clickhouse支持Mysql协议、Htpp,JDBC种查询方式。
+
+**Doris****查询接入：** Doris支持Mysql协议，现有的大量Mysql工具都可以直接使用，用户的学习和迁移成本较低。
+
+### **11.2** **学习成本**
+
+**Clickhouse****学习成本**：用户需要理解分布式表和ReplicatedMergeTree引擎，学习成本低。
+
+**Doris****学习成本**：用户需要理解聚合模型，明细模型，前缀索引，RollUp表这些概念。
+
+### **11.3 Schema Change**
+
+Schema在线变更是一个十分重要的feature，因为在实际业务中，Schema的变更会十分频繁。
+
+**Clickhouse Schema Change**：Clickhouse支持Online Schema Change。
+
+**Doris Schema Change**：Doris支持Online Schema Change。
+
+所谓的Schema在线变更就是指**Scheme的变更不会影响数据的正常导入和查询**，Doris中的Schema在线变更有3种：
+
+- direct schema change： 就是重刷全量数据，成本最高，和kylin的做法类似。 当修改列的类型，稀疏索引中加一列时需要按照这种方法进行。
+- sorted schema change: 改变了列的排序方式，需对数据进行重新排序。 例如删除排序列中的一列, 字段重排序。
+- linked schema change: 无需转换数据，直接完成。 对于历史数据不会重刷，新摄入的数据都按照新的Schema处理，对于旧数据，新加列的值直接用对应数据类型的默认值填充。 例如加列操作。 Druid也支持这种做法。
+
+## **12** **功能**
+
+
+
+| 功能                     | Clickhouse | Doris  |
+| ------------------------ | ---------- | ------ |
+| 标准SQL                  | 支持       | 支持   |
+| Mysql 协议               | 支持       | 支持   |
+| 离线导入                 | 支持       | 支持   |
+| 实时导入                 | 支持       | 支持   |
+| 聚合查询                 | 支持       | 支持   |
+| 明细查询                 | 支持       | 支持   |
+| Adhoc查询                | 支持       | 支持   |
+| 点更新                   | 支持       | 支持   |
+| 高并发，低延迟的精准去重 | 不支持     | 不支持 |
+
+
+
+注：虽然Doirs理论上可以同时支持高并发，低延迟的OLAP查询和高吞吐的Adhoc查询，但显然这两类查询会相互影响。所以Baidu在实际应用中也是用两个集群分别满足OLAP查询和Adhoc查询需求。
+
+## **13** **社区和生态**
+
+Doris社区刚刚起步，目前核心用户只有Baidu；
+
+clickhouse的社区和生态已经比较成熟，目前已经在多家大型公司的生产环境中使用。
