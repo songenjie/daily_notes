@@ -1,5 +1,3 @@
-
-
 ​				                                                                  个人简历 
 
 - 姓名：宋恩杰
@@ -8,6 +6,60 @@
 - 电话：15313504109
 
 
+
+JD OLAP 
+
+项目简介：OLAP解决PB级数据存储、即席查询、高效准确去重、满足多种数据源接入、兼容多种数据类型、监控Mysql协议、列式存储、高可用高并发的事实数据分析系统 平台目前主要使用 Doris,Clickhouse 两个开源产品,前期工作Doris为主，后期工作Clickhouse为主
+
+
+
+个人开发工作
+
+- Doris 
+
+个人COMMIT历史 https://github.com/songenjie/incubator-doris/commits/songenjie-commit
+
+1. fe add result cache https://github.com/songenjie/incubator-doris/commit/95764a54c0711181361cec726cb9b1faacef4f43
+2. fix  java.lang.ClassCastException https://github.com/apache/incubator-doris/pull/2667/files (进入社区)
+3. fix  be log rotate err https://github.com/apache/incubator-doris/blob/12c59ba889cdde24a6211651c166936a4593f191/thirdparty/patches/glog-0.3.3-for-palo2.patch#L298 （进入社区）
+4. improve json data type https://github.com/songenjie/incubator-doris/commit/26c0e6fb55bd3660c02c0c9fc62e5472d894f69c
+5. support avro data type https://github.com/songenjie/incubator-doris/commit/3000bdeb1daf9c001235c27578671bca0232c525
+6. support hive sql import https://github.com/songenjie/incubator-doris/commit/043d80586963d9a22c3d21517d9c6fcc3c54ed4e
+7. 熟练 Doris 存储设计、写入..过程
+
+
+
+- ClickHouse 
+
+1. Clickhouse Stuct https://github.com/songenjie/daily_notes/blob/master/source/clickhouse_storage1.jpg
+2. Clickhouse Stroage [https://github.com/songenjie/daily_notes/blob/master/2020/7%E6%9C%88/%E5%B7%A5%E4%BD%9C/clickhouse_%E5%88%97%E5%BC%8F%E5%AD%98%E5%82%A8.md](https://github.com/songenjie/daily_notes/blob/master/2020/7月/工作/clickhouse_列式存储.md) Clickhouse HA方案设计 [单台机器，多副本，多集群，多磁盘，多进程](https://www.processon.com/view/link/5eec71e4e401fd1fd2a026b2)
+
+3. 扩缩容/数据迁移方案 [resharding,这里可单集群，多进程多副本策略相关](https://www.processon.com/view/link/5eec8b70e0b34d4dba4879b3)   
+4. 集群管理 [admin_server集群管理设计](https://www.processon.com/view/link/5ee6ed2b07912929cb42b776)
+
+5. 熟练ck 数据 存储、写入、索引 流程
+
+
+
+
+
+# JD Monitor
+
+### 项目简介：
+
+统一监控平台 是基于CNCF组织下prometheus、thanos等组件的优化和自研组件，完成对物理层（4w台机器和其进程层（jvm）、应用层（buffalo、flink、fregata等）数据指标的动态采集、转换、采集、存储和告警系统     
+
+
+
+个人开发工作
+
+1. COMMITS https://github.com/songenjie/prometheus/commits/branch-v2.10.0
+2. 系统架构图 https://github.com/songenjie/daily_notes/blob/master/source/prometheus_alll_monitor.jpg
+3. prometheus support chinese label https://github.com/songenjie/prometheus/commit/c98f89f33c024d10ab2bfedeb7464acb9af04b88
+4. prometheus resolved alter values is after value https://github.com/songenjie/prometheus/commit/d55c3575f7d81729375f17dff9d628fa0fa39652
+5. support jmx to prometheus metrics https://github.com/songenjie/jmx-to-metrics
+6. fix some else bug (fix thanos compact err ,数据传输等问题)
+7. 封装 go log https://github.com/songenjie/go
 
 
 
@@ -234,29 +286,3 @@ PV,UV 计算效率>Doris
       2>所有组件基本在机器不扩容情况下做到高可用
       3>618支持
 
-
-
-
-
-项目简介：OLAP解决PB级数据存储、即席查询、高效准确去重、满足多种数据源接入、兼容多种数据类型、监控Mysql协议、列式存储、高可用高并发的事实数据分析系统 平台目前主要使用 Doris,Clickhouse 两个开源产品,前期工作Doris为主，后期工作Clickhouse为主
-
-主要对接以下类型业务 
-1 百亿级别订单实时按天、品类等维度统计下单金额 ; 2 每天数亿的点击流数据实时统计PV与UV ; 3 kafka中的监控日志的实时分析
-主要的性能差距是(以下只是普遍情况) 
-1 多表Join性 Doris 强于 ClickHouse; 2 更新场景(key,value value频繁更新 ClickHouse 强于 Doris (行为都是以增代删，Clickhouse 单表计算 > Doris)) ; 3 运维（Doris 维护成本 ClickHouse 大于 Doris）; 4 HA (整体方案 Doris > ClickHouse) ; 5 写入 (ClickHouse > Doris ) ; 6 大查询（性能好，但是ClickHouse ... 。
-个人工作:
-1> doris https://github.com/apache/incubator-doris 
-1 结构集缓存(解决高QPS问题),正在做Tablet层级的结构集缓存 ; 
-2 兼容多数据类型（orc、json、avro)的导入 ; 
-3 熟练doris 存储、写入(索引）、查询 ; 
-4 业务接入（京东内部、优惠券、物流订单、点击流、搜索推荐...) ; 
-5 外围工具（数据导入api-server、flink、hive、集群管控[导入任务管理)） ; 
-6 618,双十一业务支持；
-7 ... 。
-
-2> clickhouse https://github.com/ClickHouse/ClickHouse 
-1 集群HA方案(单台机器多集群、多进程、多磁盘、多副本) 
-2 集群扩缩容方案（扩缩、缩容、迁移、替换等场景）;
-3 集群管理（admin_server集群管理) 
-4 熟练ck 数据 存储、写入、索引 流程 ;
-5 ...
