@@ -43,7 +43,7 @@ func find(arr1 []int, l1 int, r1 int, arr2 []int, l2 int, r2 int, k int) int {
 		return find(arr1, l1, mid1, arr2, mid2+1, r2, k-(mid2-l2+1))
 	}
 	//很多没有测试过debug 都出现在了这
-	if mid1+mid2+2 == k {
+	if mid1-l1+mid2-l2+2 == k {
 		return arr1[mid1]
 	}
 	//比如 测试中第三个数字 mid+mid2+2<k 没有结束 前面的都可以去掉
