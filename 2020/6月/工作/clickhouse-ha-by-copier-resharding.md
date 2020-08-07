@@ -334,7 +334,7 @@ SETTINGS storage_policy = 'jdob_ha';
 
 - schema.xml
 
-```
+```xml
 <yandex>
     <!-- Configuration of clusters as in an ordinary server config -->
     <remote_servers>
