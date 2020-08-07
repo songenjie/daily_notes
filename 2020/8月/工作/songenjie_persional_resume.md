@@ -88,16 +88,16 @@ Prometheus, a [Cloud Native Computing Foundation](https://cncf.io/) project, is 
 
 
 
-- some PR for me: [branch]https://github.com/songenjie/prometheus/commits/branch-v2.10.0
+- some PR for me: [branch](https://github.com/songenjie/prometheus/commits/branch-v2.10.0)
 
 - Persion Works:
 
 1. Complete system architecture [Design](https://github.com/songenjie/daily_notes/blob/master/source/prometheus_alll_monitor.jpg)
 2. Prometheus Support Chinese Label [Commits](https://github.com/songenjie/prometheus/commit/c98f89f33c024d10ab2bfedeb7464acb9af04b88)
-3. prometheus resolved alter values is after value https://github.com/songenjie/prometheus/commit/d55c3575f7d81729375f17dff9d628fa0fa39652
-4. support jmx to prometheus metrics https://github.com/songenjie/jmx-to-metrics
-5. fix some else bug (fix thanos compact err ,数据传输等问题)
-6. package  go log https://github.com/songenjie/go
+3. prometheus resolved alter values is after value [commit](https://github.com/songenjie/prometheus/commit/d55c3575f7d81729375f17dff9d628fa0fa39652)
+4. support  convert jmx metrics to prometheus metrics [project]( https://github.com/songenjie/jmx-to-metrics)
+5. fix some else bug 
+6. package  go log [project](https://github.com/songenjie/go)
 
 
 
