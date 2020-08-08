@@ -10,6 +10,8 @@ Date of Birth: 1995/05/03
 
 Sex: Male
 
+Apply to position: Software Development Engineer
+
 Persion work experience:  [JD](https://www.jd.com/)
 
 Place of residence: China Beijing 
@@ -24,7 +26,7 @@ Phone: 153 1350 4109
 
 - Now, I  stay in Beijing  to find a suitable job for myself.
 
-I worked as a  Software Engineer in JD ,and I have about 2 year work experience. My major work was about OLAP system in bit data. I also did some other things like writing test cases,doing detailed designs and so on.I think I'm a good team player in project teams.I am eager to get an opportunity to fully play my ability,my computer skills and English skills.I think this job is a good choice and I can be competent for this job!!. That’s all,thank you.
+I worked as a  Software Engineer in JD ,and I have about 2 year work experience. My major work was about OLAP system in bit data. I also did some other things like writing test cases,doing detailed designs and so on.I think I'm a good team player in project teams.I am eager to get an opportunity to fully play my ability,my computer skills and English skills.I think this job is a good choice and I can be competent for this job!
 
 
 
