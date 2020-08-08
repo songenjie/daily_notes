@@ -16,7 +16,7 @@ Place of residence: China Beijing
 
 Graduated From Chang'an University
 
-Email: turbo_json@qq.com
+E-mail: turbo_json@qq.com
 
 Phone: 153 1350 4109 
 
@@ -28,7 +28,19 @@ I worked as a  Software Engineer in JD ,and I have about 2 year work experience.
 
 
 
-## Project Experience
+## Professional skills;
+- Familiar with the operating system and system kernel in linux and windows
+- Familiar with C language, C++ .
+- Familiar with GO.
+- Familiar with MPP System structure(eg :clickhouse ,doris)
+- Be able to use the java.
+- ...
+
+
+
+## Project experience at JD
+
+
 
 ### Project 1: OLAP (Online Analytical Processing)
 
