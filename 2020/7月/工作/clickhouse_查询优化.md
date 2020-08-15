@@ -48,7 +48,7 @@ group by i_item_id order by i_item_id limit 10;
 - IN的性能比JOIN好，优先使用IN
 - 在做Join之前先过滤数据，然后再Join可以显著的提升性能，如下SQL从13.03秒优化到0.39秒
 
-```
+```mysql
 SELECT COUNT(*) FROM (
         SELECT
           COALESCE(t1.orderid, '') AS sale_ord_id,
@@ -150,7 +150,7 @@ SELECT * FROM table1 JOIN table2 ON table1.id = table2.id
 
 1. 子查询嵌套联合查询性能好
 
-```
+```mysql
 //TPC-DS原始SQL，两层SQL嵌套
 select c_last_name
        ,c_first_name

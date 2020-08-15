@@ -44,7 +44,7 @@
 | count.txt                            | 计数文件，明文格式存储，当前数据分片下目录数据的行数         |
 | primary.idx                          | 一级索引文件，使用二进制格式存储，存放哈希索引，一张MergeTree表只能声明一次一级索引，稀疏索引 6.3节 |
 | [Column.]bin                         | 数据文件，压缩格式存储 默认LZ4压缩格式，存储某一列的数据 6.5节 |
-| [Column.]mrk                         | 列字段标记文件，使用二进制格式存储。保存了.bin文件中国呢数据的偏移量信息。标记文件与稀疏索引对齐，又与.bin文件一一对应，所以MergeTree 通过标记文件建立了 primary.idx 稀疏索引与.bin数据文件之间的映射关系。查询的流程就是1 通过 primary.idx稀疏索引与.bin数据文件之间的映射关系。即首先通过稀疏索引 primary.idx 找到对应数据的偏移量信息(.mrk),再通过偏移量直接从.bin文件中读取数据，由于.mrk标记文件和.bin文件一一对应。所以mergetree中每隔字段都会拥有与其对应的.mrk标记文件 6.6节 |
+| [Column.]mrk                         | 列字段标记文件，使用二进制格式存储。保存了.bin文件中数据的偏移量信息。标记文件与稀疏索引对齐，又与.bin文件一一对应，`所以MergeTree 通过标记文件建立了 primary.idx 稀疏索引与.bin数据文件之间的映射关系`。查询的流程就是1 通过 primary.idx稀疏索引与.bin数据文件之间的映射关系。即首先通过稀疏索引 primary.idx 找到对应数据的偏移量信息(.mrk),再通过偏移量直接从.bin文件中读取数据，由于.mrk标记文件和.bin文件一一对应。所以mergetree中每隔字段都会拥有与其对应的.mrk标记文件 6.6节 |
 | [Column].mark2                       | 如果使用了自适应大小的索引间隔，则标记文件会以.mrk2命名。它的工作原理与作用与.mrk相同 |
 | Partition.dat 与 minmax_[Column].idx | 如果使用了分区键，例如 PARTITION BY EventTime,则会额外生成 partititon.dat 与 minmax索引文件，它们均使用二进制格式文件存储. Partition.dat 用于保存当前分区下分区表达式最终生成的值；而minmax索引用户记录当前part 下，字段对应原始数据的最小和最大值。toYYYYMM(EventTIME) ,minmax 2019-05-012019-05-05 |
 
@@ -79,9 +79,9 @@ Level: 合并的层级 可以理解为该 part 是被合并 level次后形成的
 
 #### Part 合并
 
-![merge1](/source/clickhouse_part_merge1.jpg)
+![merge1](https://github.com/songenjie/daily_notes/blob/master/source/clickhouse_part_merge1.jpg)
 
-![merge2](/source/clichouse_part_merge2.jpg)
+![merge2](https://github.com/songenjie/daily_notes/blob/master/source/clichouse_part_merge2.jpg)
 
 - 旧的分区不会被立马删除，会留存一段时间，但是就的分区目录已不再是激活状态（activate==0),所以数据查询，旧的分区会被过滤掉
 
@@ -195,7 +195,7 @@ clickhouse compress --stata < /chbase/ data/default/hits_v1/201403_1_34_3/JavaEn
 
 
 
-- 数据块大小有 上下线设置 64k~1M 
+- 数据块大小有 上下线设置 64k~1M  page block
 
 min_compress_block_size(65535 默认 16k) ~ max_compress_block_size(1048576 1M) ,最终压缩的大小，和一个间隔(index_granularity) 内实际大小有关
 

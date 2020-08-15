@@ -15,7 +15,7 @@ Primary.idx: 一级索引好比这本书的一级章节目录
 
 
 
-![数据读取关系图](/source/clickhouse_存储关系图.jpg) 
+![数据读取关系图](https://github.com/songenjie/daily_notes/blob/master/source/clickhouse_存储关系图.jpg) 
 
 - 特征
 
@@ -85,7 +85,9 @@ Primary.idx: 一级索引好比这本书的一级章节目录
 
 上面的例子就都是多对一的情况
 
+ 
 
+这取决于 该列 字段的大小  1bytes 8 bytes  8bytes
 
 ![多对一](/source/clickhouse_索引_压缩块_多对一.jpg)
 

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<yandex>
+   <!-- 日志 -->
+   <logger>
+       <level>trace</level>
+       <log>/data1/clickhouse/log/server.log</log>
+       <errorlog>/data1/clickhouse/log/error.log</errorlog>
+       <size>1000M</size>
+       <count>10</count>
+   </logger>
+
+   <!-- 端口 -->
+   <http_port>8123</http_port>
+   <tcp_port>9000</tcp_port>
+   <interserver_http_port>9009</interserver_http_port>
+
+   <!-- 本机域名 -->
+   <interserver_http_host>这里需要用域名，如果后续用到复制的话</interserver_http_host>
+
+   <!-- 监听IP -->
+   <listen_host>0.0.0.0</listen_host>
+   <!-- 最大连接数 -->
+   <max_connections>64</max_connections>
+
+   <!-- 没搞懂的参数 -->
+   <keep_alive_timeout>3</keep_alive_timeout>
+
+   <!-- 最大并发查询数 -->
+   <max_concurrent_queries>16</max_concurrent_queries>
+
+   <!-- 单位是B -->
+   <uncompressed_cache_size>8589934592</uncompressed_cache_size>
+   <mark_cache_size>10737418240</mark_cache_size>
+
+   <!-- 存储路径 -->
+   <path>/data1/clickhouse/</path>
+   <tmp_path>/data1/clickhouse/tmp/</tmp_path>
+
+   <!-- user配置 -->
+   <users_config>users.xml</users_config>
+   <default_profile>default</default_profile>
+
+   <log_queries>1</log_queries>
+
+   <default_database>default</default_database>
+
+   <remote_servers incl="clickhouse_remote_servers" />
+   <zookeeper incl="zookeeper-servers" optional="true" />
+   <macros incl="macros" optional="true" />
+
+   <!-- 没搞懂的参数 -->
+   <builtin_dictionaries_reload_interval>3600</builtin_dictionaries_reload_interval>
+
+   <!-- 控制大表的删除 -->
+   <max_table_size_to_drop>0</max_table_size_to_drop>
+
+   <include_from>/data1/clickhouse/metrika.xml</include_from>
+</yandex>

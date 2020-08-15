@@ -1,0 +1,87 @@
+<yandex>
+<!-- 集群配置 -->
+<clickhouse_remote_servers>
+	<!-- 集群名称-->
+    <bip_ck_cluster>
+        <shard>
+            <internal_replication>false</internal_replication>
+            <replica>
+                <host>ck1.xxxx.com.cn</host>
+                <port>9000</port>
+                <user>default</user>
+                <password>******</password>
+            </replica>
+			<replica>
+                <host>ck2.xxxx.com.cn</host>
+                <port>9000</port>
+                <user>default</user>
+                <password>******</password>
+            </replica>
+        </shard>
+        <shard>
+            <internal_replication>false</internal_replication>
+            <replica>
+                <host>ck2.xxxx.com.cn</host>
+                <port>9000</port>
+                <user>default</user>
+                <password>******</password>
+            </replica>
+			<replica>
+                <host>ck3.xxxxa.com.cn</host>
+                <port>9000</port>
+                <user>default</user>
+                <password>******</password>
+            </replica>
+        </shard>
+        <shard>
+            <internal_replication>false</internal_replication>
+            <replica>
+                <host>ck3.xxxxa.com.cn</host>
+                <port>9000</port>
+                <user>default</user>
+                <password>******</password>
+            </replica>
+			<replica>
+                <host>ck1.xxxx.com.cn</host>
+                <port>9000</port>
+                <user>default</user>
+                <password>******</password>
+            </replica>
+        </shard>
+    </bip_ck_cluster>
+</clickhouse_remote_servers>
+
+<!-- 本节点副本名称（这里无用） -->
+<macros>
+    <replica>ck1</replica>
+</macros>
+
+<!-- 监听网络（貌似重复） -->
+<networks>
+   <ip>::/0</ip>
+</networks>
+<!-- ZK  -->
+<zookeeper-servers>
+  <node index="1">
+    <host>1.xxxx.sina.com.cn</host>
+    <port>2181</port>
+  </node>
+  <node index="2">
+    <host>2.xxxx.sina.com.cn</host>
+    <port>2181</port>
+  </node>
+  <node index="3">
+    <host>3.xxxxp.sina.com.cn</host>
+    <port>2181</port>
+  </node>
+</zookeeper-servers>
+<!-- 数据压缩算法  -->
+<clickhouse_compression>
+<case>
+  <min_part_size>10000000000</min_part_size>
+  <min_part_size_ratio>0.01</min_part_size_ratio>
+  <method>lz4</method>
+</case>
+</clickhouse_compression>
+
+</yandex>
