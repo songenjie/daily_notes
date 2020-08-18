@@ -1,3 +1,40 @@
+### Why Not Other ROLAP
+
+我们当时主要调研了 SQL on Hadoop，ClickHouse，SnappyData，TiDB，Doris 等系统， 这些系统都是优秀的开源系统，并且都有其适用场景。我们在选型时主要从功能，架构，性能，易用性，运维成本等几个维度去考虑。
+
+下面我先介绍下我们为什么没有选择这些系统，再介绍我们为什么选择了 Doris。
+
+- **SQL on Hadoop 系统**：无法支持更新，性能也较差。
+- **TiDB**： TiDB 虽然当初号称可以支撑 100%的 TP 和 80%的 AP，但是架构设计主要是面向 TP 场景，缺少针对 AP 场景专门的优化，所以 OLAP 查询性能较差，TiDB 团队目前正在研发专门的 OLAP 产品：TiFlash，TiFlash 具有以下特点：列存，向量化执行，MPP，而这些特点 Doris 也都有。
+- **SnappyData**：SnappyData 是基于 Spark + GemFire 实现的内存数据库，机器成本较高，而我们机器资源很有限，此外 SnappyData 的计算是基于 JVM 的，会有 GC 问题，影响查询稳定性。
+- **ClickHouse**：Clickhouse 是一款单机性能十分彪悍的 OLAP 系统，但是当集群加减节点后，系统不能自动感知集群拓扑变化，也不能自动 balance 数据，导致运维成本很高，此外 Clickhouse 也不支持标准 SQL，我们用户接入的成本也很高。
+
+### Why Doris
+
+对我们用户来说，**Doris 的优点是功能强大，易用性好**。 功能强大指可以满足我们用户的需求，易用性好主要指 **兼容 Mysql 协议和语法，以及 Online Schema Change**。 兼容 Mysql 协议和语法让用户的学习成本和开发成本很低， Online Schema Change 也是一个很吸引人的 feature，因为在业务快速发展和频繁迭代的情况下，Schema 变更会是一个高频的操作。
+
+对我们平台侧来说，Doris 的优点是**易运维，易扩展和高可用**：
+
+- 易运维指 Doris 无外部系统依赖，部署和配置都很简单。
+- 易扩展指 Doris 可以一键加减节点，并自动均衡数据。
+- 高可用值 Dors 的 FE 和 BE 都可以容忍少数节点挂掉。
+
+
+
+
+
+
+
+
+
+
+
+- 
+- 
+- 
+- 
+- 
+- 
 - [clickhouse VS Apache Doris](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-clickhouseVSApacheDoris)
   - [1 系统架构](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-1系统架构)
     - [1.1 What is clickhouse](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-1.1Whatisclickhouse)
