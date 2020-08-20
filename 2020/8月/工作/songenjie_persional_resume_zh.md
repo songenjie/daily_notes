@@ -18,14 +18,13 @@
   ### JD OLAP 
 
   - 时间：2019/04-至今 
-
-  - 项目简介： OLAP解决PB级数据存储、即席查询、高效准确去重、满足多种数据源接入、兼容多种数据类型、监控Mysql协议、列式存储、高可用高并发的事实数据分析系统 平台目前主要使用 Doris,Clickhouse 两个开源产品,前期工作Doris为主，后期工作Clickhouse为主
-
+- 项目简介： OLAP解决PB级数据存储、即席查询、高效准确去重、满足多种数据源接入、兼容多种数据类型、监控Mysql协议、列式存储、高可用高并发的事实数据分析系统 平台目前主要使用 Doris,Clickhouse 两个开源产品,前期工作Doris为主，后期工作Clickhouse为主
   
 
-  ### 1 [Apache Doris :](  https://github.com/apache/incubator-doris)
-
-  - 个人commits [Some Commits]( https://github.com/songenjie/incubator-doris/commits/songenjie-commit)
+  
+### 1 [Apache Doris :](  https://github.com/apache/incubator-doris)
+  
+- 个人commits [Some Commits]( https://github.com/songenjie/incubator-doris/commits/songenjie-commit)
   - 个人工作：
     1. Fix be log not rotate bug [commit](https://github.com/songenjie/incubator-doris/commit/95764a54c0711181361cec726cb9b1faacef4f43)
     2. Suport json data type import [commit](https://github.com/songenjie/incubator-doris/commit/26c0e6fb55bd3660c02c0c9fc62e5472d894f69c)
@@ -33,40 +32,48 @@
     4. Support importing Doris through hive sql [commits](https://github.com/songenjie/incubator-doris/commit/043d80586963d9a22c3d21517d9c6fcc3c54ed4e)
     5. Fix java.lang.ClassCastException [commit](https://github.com/apache/incubator-doris/pull/2667/files)
     6. Proficient in Doris storage design, writing process
+  
 
   
 
+  
+
+  
+
+  
+  
+  
   #### 2 [Yandex  ClickHouse: ](https://github.com/ClickHouse/ClickHouse)
-
-  - 个人工作:
-
-  1. Proficient in Doris storage design, writing process
+  
+- 个人工作:
+  
+1. Proficient in Doris storage design, writing process
      - Clickhouse Struct : [persion struct jpg](https://github.com/songenjie/daily_notes/blob/master/source/clickhouse_storage1.jpg)         [struct](https://www.processon.com/view/link/5eec71e4e401fd1fd2a026b2)           [源码分析](https://github.com/songenjie/daily_notes/blob/master/2020/7月/工作/读clickhouse原理解析与应用实践有感.md) 
-     - Clickhouse [数据段](https://github.com/songenjie/daily_notes/blob/master/2020/7月/工作/clickhouse_数据标记.md)
+   - Clickhouse [数据段](https://github.com/songenjie/daily_notes/blob/master/2020/7月/工作/clickhouse_数据标记.md)
   2. Clickhouse HA : Clickhouse realizes single machine, multiple copies, multiple clusters, multiple disks, and multiple processes [design](https://www.processon.com/view/link/5f0580e17d9c08442052bfd6) [ppt分享](https://github.com/songenjie/daily_notes/blob/master/2020/8月/工作/clickhouse-扩缩容.pptx)
   3. Realize clickhouse expansion, offline, and replacement plan[design](https://www.processon.com/view/link/5eec8b70e0b34d4dba4879b3)
-
   
-
-  工作内容：
-
-  1. JD OLAP Doris ClickHouse版本维护,bug 修复等一系列工作 如上个人工作
+  
+  
+工作内容：
+  
+1. JD OLAP Doris ClickHouse版本维护,bug 修复等一系列工作 如上个人工作
   2. 业务对接（优惠券、订单、物流、点击流、搜索推荐平台）
-  3. 外围工具融合（1 api sever 开发 2 跟平台数据集市融合 3 flink 模版 4 hive导入兼容等问题 5 partition ddl ）
+3. 外围工具融合（1 api sever 开发 2 跟平台数据集市融合 3 flink 模版 4 hive导入兼容等问题 5 partition ddl ）
   4. 熟练 Doris  Ciickhouse 架构、存储、写入.. 等流程
-  5. 平台 618，双十一 支持
-
+5. 平台 618，双十一 支持
   
 
-  ###  [JD Monitor]( https://github.com/prometheus/prometheus)
-
-  - 时间：2018/07-2019.07
-
+  
+###  [JD Monitor]( https://github.com/prometheus/prometheus)
+  
+  - 时间：2018/07-2019.07 
+  
   - 项目简介：JD Monitor是基于CNCF组织下prometheus、thanos等组件的优化和自研组件，完成对物理层（4w台机器和其进程层（jvm）、应用层（buffalo、flink、fregata等）数据指标的动态采集、转换、采集、存储和告警系统 
-
   
-
   - 个人工作: [branch](https://github.com/songenjie/prometheus/commits/branch-v2.10.0)
+  
+    
 
 
   1. Complete system architecture [Design](https://github.com/songenjie/daily_notes/blob/master/source/prometheus_alll_monitor.jpg)
@@ -76,7 +83,7 @@
   5. fix some else bug 
   6. package  go log [project](https://github.com/songenjie/go)
 
-  
+
 
   - 工作内容：
 
