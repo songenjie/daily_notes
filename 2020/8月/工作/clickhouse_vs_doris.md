@@ -13,6 +13,78 @@
 
 
 
+两年
+
+-  clickhouse 
+
+zookeeper 被替换 
+
+Clickhouse 分布式 优化
+
+raft 一致性协议
+
+Es clickhouse 存储打通
+
+ES 集群
+
+数据自动同步
+
+用户使用 物化视图的优化 
+
+sql改写
+
+排序键 调整 
+
+引擎核心作为基础
+
+- 分享越来越多
+
+
+
+
+
+机会
+
+
+
+spark batch 
+
+flink stream
+
+clickhouse olap:
+
+
+
+
+
+滴滴：北京
+
+1w+
+
+杭州：1k+
+
+
+
+
+
+待遇：
+
+上下班不打卡
+
+周某双休
+
+
+
+
+
+前面的面试 平面二级部门 谢谢
+
+hr的联系
+
+
+
+clickhouse doris 争议：
+
 
 
 
@@ -39,12 +111,6 @@
 
 
 
-- 
-- 
-- 
-- 
-- 
-- 
 - [clickhouse VS Apache Doris](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-clickhouseVSApacheDoris)
   - [1 系统架构](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-1系统架构)
     - [1.1 What is clickhouse](https://cf.jd.com/pages/viewpage.action?pageId=275476811#clickhousevsdoris功能对比-1.1Whatisclickhouse)
@@ -96,6 +162,8 @@
 Clickhouse 和 Apache Doris 都是优秀的开源OLAP系统，本文将全方位地对比clickhouse和Doris。Clickhouse和Doris分别是ROLAP的代表，对比这两个系统的目的不是为了说明哪个系统更好，**只是为了明确每个系统的设计思想和架构原理，让大家可以根据自己的实际需求去选择合适的系统，也可以进一步去思考我们如何去设计出更优秀的OLAP系统**。
 
 **注： 本文的对比基于clickhouse 19.7.0 和Apache Doris 0.9.0****。**
+
+
 
 ## **1** **系统架构**
 
@@ -211,6 +279,10 @@ Doris中RollUp表的路由规则如下：
 - 行数最小的
 - 列数最小的
 
+
+
+
+
 ### **2.3 Clickhouse VS Doris RollUp**
 
 
@@ -222,6 +294,8 @@ Doris中RollUp表的路由规则如下：
 | 计算方式     | 从原始数据直接生成每个RollUp表数据               | 从原始数据直接生成每个RollUp表数据               |
 | 物理存储     | 每个RollUp表是独立存储                           | 每个RollUp表是独立存储                           |
 | 查询路由     | 会根据过滤列，排序列，join列，行数，列数进行路由 | 会根据过滤列，排序列，join列，行数，列数进行路由 |
+
+
 
 
 
@@ -240,6 +314,10 @@ Doris的明细模型不会有任何预聚合，不区分维度列和指标列，
 
 
 这里需要注意一点，**Doris中一张表只能有一种数据模型**，即要么是聚合模型，要么是明细模型，而且**Roll Up表的数据模型必须和Base表一致**，也就是说明细模型的Base 表不能有聚合模型的Roll Up表。
+
+
+
+
 
 ## **3** **存储引擎**
 

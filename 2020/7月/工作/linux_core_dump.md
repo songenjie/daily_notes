@@ -1,5 +1,5 @@
-1.设置core文件大小
-列出所有资源的限制： ulimit -a
+1. 设置core文件大小
+   列出所有资源的限制： ulimit -a
 
 
 
@@ -18,9 +18,9 @@ unlimited：core文件的大小不受限制
 
 尽量将这个文件大小设置得大一些，程序崩溃时生成Core文件大小即为程序运行时占用的内存大小。可能发生堆栈溢出的时候，占用更大的内存
 
-2.设置core文件的名称和文件路径
-默认生成路径：输入可执行文件运行命令的同一路径下
-默认生成名字：默认命名为core。新的core文件会覆盖旧的core文件
+2. 设置core文件的名称和文件路径
+   默认生成路径：输入可执行文件运行命令的同一路径下
+   默认生成名字：默认命名为core。新的core文件会覆盖旧的core文件
 
 a.设置pid作为文件扩展名
 
@@ -46,12 +46,12 @@ sysctl -w kernel.core_pattern=/corefile/core.%e.%p.%s.%E
 %h - insert hostname where the coredump happened into filename 添加主机名
 %e - insert coredumping executable name into filename 添加导致产生core的命令名
 
-3.测试是否能生成core文件
-kill -s SIGSEGV $$
-查看/corefile目录下是否生成了core文件
+3. 测试是否能生成core文件
+   kill -s SIGSEGV $$
+   查看/corefile目录下是否生成了core文件
 
-4.调试core文件
-Eg. test.c
+4. 调试core文件
+   Eg. test.c
 
 #include<stdio.h>
 int main()
@@ -68,11 +68,12 @@ bingo:这里出现段错误并生成core文件了
 开始调试
 gdb ./test core-test-31421-1476266571
 
-
 根据堆栈信息查看bug
 
+
+
 5. 基本GDB命令
-为了定位问题，常常需要进行单步跟踪，设置断点之类的操作。
+   为了定位问题，常常需要进行单步跟踪，设置断点之类的操作。
 
 下边列出了GDB一些常用的操作。
 
@@ -99,12 +100,21 @@ kill -s SIGSEGV processid
 
 
 
-sudo su root
 
-echo "/tmp/core-%e-%p-%t" > /proc/sys/kernel/core_pattern
 
-vim /data0/jdolap/be/deploy/bin/start_be.sh 
 
-ulimit -c unlimited
 
-systemctl restart jdolap_be
+
+
+生成core dump 
+
+1. 只是测试一遍 ，修改proc/pid/limits 配置文件，生成coredump ,且进程不需要重启
+2. 只修改当前类型进程，修改进程启动参数 ulimit -c **
+3. 当前所有root 账户生效 ulimit **
+
+
+
+
+
+
+
