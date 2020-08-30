@@ -23,7 +23,7 @@
 
   
 ### 1 [Apache Doris :](  https://github.com/apache/incubator-doris)
-  
+
 - 个人commits [Some Commits]( https://github.com/songenjie/incubator-doris/commits/songenjie-commit)
   - 个人工作：
     1. Fix be log not rotate bug [commit](https://github.com/songenjie/incubator-doris/commit/95764a54c0711181361cec726cb9b1faacef4f43)
@@ -39,9 +39,7 @@
   
 
   
-
-  
-  #### 2 [Yandex  ClickHouse: ](https://github.com/ClickHouse/ClickHouse)
+#### 2 [Yandex  ClickHouse: ](https://github.com/ClickHouse/ClickHouse)
   
   - 个人工作:
   
@@ -50,21 +48,21 @@
    - Clickhouse [数据段](https://github.com/songenjie/daily_notes/blob/master/2020/7月/工作/clickhouse_数据标记.md)
   2. Clickhouse HA : Clickhouse realizes single machine, multiple copies, multiple clusters, multiple disks, and multiple processes [design](https://www.processon.com/view/link/5f0580e17d9c08442052bfd6) [ppt分享](https://github.com/songenjie/daily_notes/blob/master/2020/8月/工作/clickhouse-扩缩容.pptx)
 3. Realize clickhouse expansion, offline, and replacement plan[design](https://www.processon.com/view/link/5eec8b70e0b34d4dba4879b3)
+
   
-  
-  
+
   工作内容：
-  
+
 1. JD OLAP Doris ClickHouse版本维护,bug 修复等一系列工作 如上个人工作
   2. 业务对接（优惠券、订单、物流、点击流、搜索推荐平台）
 3. 外围工具融合（1 api sever 开发 2 跟平台数据集市融合 3 flink 模版 4 hive导入兼容等问题 5 partition ddl ）
   4. 熟练 Doris  Ciickhouse 架构、存储、写入.. 等流程
 5. 平台 618，双十一 支持
-  
 
-  
+
+
 ###  [JD Monitor]( https://github.com/prometheus/prometheus)
-  
+
 - 时间：2018/07-2019.07 
   
   - 项目简介：JD Monitor是基于CNCF组织下prometheus、thanos等组件的优化和自研组件，完成对物理层（4w台机器和其进程层（jvm）、应用层（buffalo、flink、fregata等）数据指标的动态采集、转换、采集、存储和告警系统 
