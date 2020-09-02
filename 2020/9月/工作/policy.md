@@ -1,0 +1,1 @@
+ALTER TABLE {name} MODIFY SETTING storage_policy='xxx'

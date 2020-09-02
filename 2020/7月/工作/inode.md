@@ -31,6 +31,8 @@ shuishen49 2017-04-26 20:44:57  3608  收藏
 版权
 首先用命令查看
 
+
+
 df -li
 
 Filesystem      Inodes  IUsed  IFree IUse% Mounted on
