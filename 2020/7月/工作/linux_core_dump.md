@@ -33,7 +33,7 @@ sysctl -w kernel.core_uses_pid=1 kernel.core_uses_pid = 1
 
 b. 控制core文件保存位置和文件名格式
 
-修改文件命令： echo "/corefile/core-%e-%p-%t" > /proc/sys/kernel/core_pattern
+修改文件命令： echo "/data1/core-%e-%p-%t" > /proc/sys/kernel/core_pattern
 或者：
 sysctl -w kernel.core_pattern=/corefile/core.%e.%p.%s.%E
 可以将core文件统一生成到/corefile目录下，产生的文件名为core-命令名-pid-时间戳
