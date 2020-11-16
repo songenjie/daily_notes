@@ -105,17 +105,13 @@ min_compress_block_size(65535 默认 16k) ~ max_compress_block_size(1048576 1M) 
 
 这取决于 该列 字段的大小  1bytes 8 bytes  8bytes
 
+
+
 ![多对一](/source/clickhouse_索引_压缩块_多对一.jpg)
 
 ![一对一](/source/clickhouse_索引_压缩块_一对一.jpg)
 
 ![一对多](/source/clickhouse_索引_压缩块_一对多.jpg)
-
-
-
-
-
-
 
 
 

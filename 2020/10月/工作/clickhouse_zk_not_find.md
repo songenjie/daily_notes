@@ -1,4 +1,4 @@
-: /clickhouse/tables/default/app_d1401005_traffic_plat_item_mins_hours_di_aggr/09/replicas/01/metadata: Cannot attach table ***  from metadata file ***
+<Error> Application: DB::Exception: Part `20200513_1_5_1` was found on disk `default` which is not defined in the storage policy。
 
 
 

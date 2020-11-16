@@ -89,7 +89,7 @@ Eg :statbox user
     </interval>
 
     <interval>
-        <duration>86400</duration>
+        <gg>86400</duration>
         <queries>10000</queries>
         <errors>1000</errors>
         <result_rows>5000000000</result_rows>
@@ -293,4 +293,16 @@ Columns:
 \- `max_read_bytes` ([Nullable](https://clickhouse.tech/docs/en/sql-reference/data-types/nullable/)([UInt64](https://clickhouse.tech/docs/en/sql-reference/data-types/int-uint/))) — Maximum of bytes read from all tables and table functions.
 \- `execution_time` ([Nullable](https://clickhouse.tech/docs/en/sql-reference/data-types/nullable/)([Float64](https://clickhouse.tech/docs/en/sql-reference/data-types/float/))) — The total query execution time, in seconds (wall time).
 \- `max_execution_time` ([Nullable](https://clickhouse.tech/docs/en/sql-reference/data-types/nullable/)([Float64](https://clickhouse.tech/docs/en/sql-reference/data-types/float/))) — Maximum of query execution time.
+
+
+
+
+
+
+
+QPS
+
+数据量
+
+
 

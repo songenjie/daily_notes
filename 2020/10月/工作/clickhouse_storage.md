@@ -48,3 +48,10 @@ clickhouse 参数调整
 
 
 
+
+
+```
+ALTER TABLE xx MODIFY SETTINGS storage_policy = 'jbod_ha'
+```
+
+可能报错`Could not clone and load part because disk does not belong to storage policy`
