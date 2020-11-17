@@ -43,6 +43,51 @@ sql改写
 
 
 
+依赖 metric.xml 读写分离
+
+
+
+
+
+1. 强悍的向量化查询引擎，特殊即为性能十分有益
+2. 运维方面较为复杂，面临用户管理、扩缩容、配置管理的问题
+
+
+
+Clickhouse HA
+
+我们实现了
+
+```
+
+```
+
+
+
+
+
+
+
+Clickhouse AdminServer
+
+
+
+
+
+全局监控
+
+配置及创建system.cluster,
+
+
+
+
+
+
+
+
+
+
+
 机会
 
 
@@ -52,26 +97,6 @@ spark batch
 flink stream
 
 clickhouse olap:
-
-
-
-
-
-滴滴：北京
-
-1w+
-
-杭州：1k+
-
-
-
-
-
-待遇：
-
-上下班不打卡
-
-周某双休
 
 
 
