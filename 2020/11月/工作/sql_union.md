@@ -122,3 +122,4 @@ ORDER BY country;
 执行以上 SQL 输出结果如下：
 
 ![img](https://www.runoob.com/wp-content/uploads/2013/09/AAA99C7B-36A5-43FB-B489-F8CE63B62C71.jpg)
+

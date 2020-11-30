@@ -2,7 +2,7 @@
 
   - 姓名： 宋恩杰
   - 英文名：Jason
-  - 应聘岗位： 大数据-计算引擎-软件开发工程师
+  - 应聘岗位： 大数据-OLAP-研发工程师
   - 工作经历：2018/07-至今  京东(技术与数据中台-软件开发)-校招
   - 学历： 本科 长安大学(211)-时间(2014/09-2018/07)
   - 工作地：北京
@@ -40,9 +40,9 @@
 
   
 #### 2 [Yandex  ClickHouse: ](https://github.com/ClickHouse/ClickHouse)
-  
+
   - 个人工作:
-  
+
 1. Proficient in Doris storage design, writing process
      - Clickhouse Struct : [persion struct jpg](https://github.com/songenjie/daily_notes/blob/master/source/clickhouse_storage1.jpg)         [struct](https://www.processon.com/view/link/5eec71e4e401fd1fd2a026b2)           [源码分析](https://github.com/songenjie/daily_notes/blob/master/2020/7月/工作/读clickhouse原理解析与应用实践有感.md) 
    - Clickhouse [数据段](https://github.com/songenjie/daily_notes/blob/master/2020/7月/工作/clickhouse_数据标记.md)
@@ -51,19 +51,31 @@
 
   
 
-  工作内容：
+ 
+
+-  工作内容：
 
 1. JD OLAP Doris ClickHouse版本维护,bug 修复等一系列工作 如上个人工作
   2. 业务对接（优惠券、订单、物流、点击流、搜索推荐平台）
 3. 外围工具融合（1 api sever 开发 2 跟平台数据集市融合 3 flink 模版 4 hive导入兼容等问题 5 partition ddl ）
   4. 熟练 Doris  Ciickhouse 架构、存储、写入.. 等流程
 5. 平台 618，双十一 支持
+6. 平台长期规划
+
+
+
+- 个人影响力
+
+1. jdolap doris 、clickhouse 双十一 大促保障 
+2. jdolap doris 集团内大规模宣讲
+3. jdolap doris 社区内宣讲-得到业界肯定
+4. jdolap clickhouse 团队内多次技术分享-团队技术深入交流
 
 
 
 ###  [JD Monitor]( https://github.com/prometheus/prometheus)
 
-- 时间：2018/07-2019.07 
+- 时间：2018/07-2019.04
   
   - 项目简介：JD Monitor是基于CNCF组织下prometheus、thanos等组件的优化和自研组件，完成对物理层（4w台机器和其进程层（jvm）、应用层（buffalo、flink、fregata等）数据指标的动态采集、转换、采集、存储和告警系统 
   
@@ -78,6 +90,28 @@
   4. support  convert jmx metrics to prometheus metrics [project]( https://github.com/songenjie/jmx-to-metrics)
   5. fix some else bug 
   6. package  go log [project](https://github.com/songenjie/go)
+
+
+
+腾讯 云架构 50%
+
+腾讯云 腾讯内部规划出来的 技术团队 -产品架构平台
+
+云架构平台 - 腾讯云CSI
+
+
+
+mongdb
+
+es
+
+hive
+
+hbase
+
+tsdb
+
+olap
 
 
 

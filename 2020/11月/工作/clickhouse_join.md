@@ -22,8 +22,6 @@
 
 
 
-
-
 `small_table`有79w数据, `big_table`有5亿数据(数据在之后的示例中没有任何变化), 在下文中`small_table`和`big_table`都为分布式表, 可以获取全量数据, `small_table_local`和`big_table_local`为各节点上的本地表名称
 
 ```mysql

@@ -74,8 +74,6 @@ Partiton-shard 可以成为最小的单位
 
 4. Background_pool_size 线程池的大小最好还是< cpu核数-4
 
-
-
 5. doris clickhouse block(page)定义就是 64k 1M就会形成一个block吗，block也是zookeeper 数据间同步的单位，数据去重的单位
 
 
@@ -94,11 +92,7 @@ Partiton-shard 可以成为最小的单位
 
 1. distributed write reshard
 
-
-
 2. 多副本同步 （同步原则设计为 true),这样通过 分布式表写入，分布式表就不必要再做数据同步的负载了
-
-
 
 
 

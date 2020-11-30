@@ -66,6 +66,18 @@ Clickhouse HA
 
 
 
+域名健康检测
+
+shard skip_unsed_replica
+
+
+
+
+
+
+
+
+
 
 
 Clickhouse AdminServer

@@ -88,3 +88,5 @@ SELECT id,sumMerge(value),uniqMerge(code) FROM agg_view GROUP BY id,city
 6. 在聚合数据时，同一分区part内，相同聚合Key的多行数据会合并成一行。对于非主键，非AggregateFunction类型字段，则会使用第一行数据的取值
 7. AgregateFucntion类型的字段使用二进制存储，在写入数据时候，需要调用 *state函数;而需要调用相应的Merge函数。其中,*表示定义时使用的聚合函数
 8. AggregateMergeTree通常为物化视图的表引擎，与普通的MergeTree搭配使用
+
+
