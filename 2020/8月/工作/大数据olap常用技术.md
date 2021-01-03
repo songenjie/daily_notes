@@ -158,3 +158,4 @@ CREATE TABLE jason.table_test on cluster KC0_CK_TS_01
   - KC0_CK_TS_01 ， clustername
   - jason , dbname
   - table_test_local, 执行本地表replicatena me
+

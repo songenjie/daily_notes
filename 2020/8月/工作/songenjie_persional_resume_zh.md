@@ -20,8 +20,7 @@
   - 时间：2019/04-至今 
 - 项目简介： OLAP解决PB级数据存储、即席查询、高效准确去重、满足多种数据源接入、兼容多种数据类型、监控Mysql协议、列式存储、高可用高并发的事实数据分析系统 平台目前主要使用 Doris,Clickhouse 两个开源产品,前期工作Doris为主，后期工作Clickhouse为主
   
-
-  
+- 
 ### 1 [Apache Doris :](  https://github.com/apache/incubator-doris)
 
 - 个人commits [Some Commits]( https://github.com/songenjie/incubator-doris/commits/songenjie-commit)
@@ -33,12 +32,7 @@
     5. Fix java.lang.ClassCastException [commit](https://github.com/apache/incubator-doris/pull/2667/files)
     6. Proficient in Doris storage design, writing process
   
-
-  
-
-  
-
-  
+- 
 #### 2 [Yandex  ClickHouse: ](https://github.com/ClickHouse/ClickHouse)
 
   - 个人工作:
@@ -49,7 +43,11 @@
   2. Clickhouse HA : Clickhouse realizes single machine, multiple copies, multiple clusters, multiple disks, and multiple processes [design](https://www.processon.com/view/link/5f0580e17d9c08442052bfd6) [ppt分享](https://github.com/songenjie/daily_notes/blob/master/2020/8月/工作/clickhouse-扩缩容.pptx)
 3. Realize clickhouse expansion, offline, and replacement plan[design](https://www.processon.com/view/link/5eec8b70e0b34d4dba4879b3)
 
-  
+
+
+
+
+
 
  
 
@@ -70,6 +68,10 @@
 2. jdolap doris 集团内大规模宣讲
 3. jdolap doris 社区内宣讲-得到业界肯定
 4. jdolap clickhouse 团队内多次技术分享-团队技术深入交流
+
+
+
+
 
 
 

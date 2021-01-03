@@ -521,3 +521,53 @@ GROUP BY CounterID, StartDate;
 
 1. 去重 使用 VersionedCollapsingMergeTree
 2. 聚合 AggregatingMergeTree
+
+
+
+
+
+**user_id** 是数据去重更新的标识;
+
+**create_time** 是版本号字段，每组数据中 create_time 最大的一行表示最新的数据;
+
+**deleted** 是自定的一个标记位，比如 0 代表未删除，1  代表删除数据。
+
+```mysql
+CREATE TABLE test_a(
+  user_id UInt64,
+  score String,
+  deleted UInt8 DEFAULT 0,
+  create_time DateTime DEFAULT toDateTime(0)
+)ENGINE= ReplacingMergeTree(create_time)
+ORDER BY user_id
+```
+
+
+
+```mysql
+SELECT
+  user_id ,
+  argMax(score, create_time) AS score, 
+  argMax(deleted, create_time) AS deleted,
+  max(create_time) AS ctime 
+FROM test_a 
+GROUP BY user_id
+HAVING deleted = 0
+```
+
+
+
+```mysql
+CREATE VIEW view_test_a AS
+SELECT
+  user_id ,
+  argMax(score, create_time) AS score, 
+  argMax(deleted, create_time) AS deleted,
+  max(create_time) AS ctime 
+FROM test_a 
+GROUP BY user_id
+HAVING deleted = 0
+
+SELECT * FROM view_test_a
+```
+
