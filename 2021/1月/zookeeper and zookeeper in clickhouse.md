@@ -63,8 +63,6 @@ zookeeper 的 watch 有一个缺点，就是这个 watch 只能被触发一次�
 
 
 
-
-
 ### 5 设计
 
 
@@ -100,7 +98,11 @@ Snapshot（记录 ZooKeeper 服务器上某一个时刻全量的内存数据内�
 
 持久化的数据有哪些  数据、事务  加起来就是全量的数据
 
+
+
 snapshot log可视化解析
+
+
 
 java -cp /data0/jdolap/zookeeper/pkg/zookeeper-3.4.12.jar:/data0/jdolap/zookeeper/pkg/lib/slf4j-api-1.7.25.jar  
 
@@ -241,7 +243,7 @@ Znode按其生命周期的长短可以分为持久结点(PERSISTENT)和临时结
 
 ### 8 优点
 
-- 强一致性可以做读写分离
+- 强一致性可以做  读写分离
 
 - 非阻塞全部快照（达成最终一致）
 - 高效的内存管理
@@ -279,8 +281,6 @@ zookeeper 当前节点太少 故障一台 集群不可用
 
 
 
-
-
 ### 11 zookeeper + clickhouse
 
 数据分层 需要有三个zookeeper 集群
@@ -309,15 +309,19 @@ zookeeper 冷热隔离
 
 
 
+
+
 #### 1 
 
 /业务/主cluster   
 
-/业务/备cluster
+/业务/备cluster/***
 
 get cluster znode
 
 set cluster znode
+
+
 
 
 
@@ -349,7 +353,13 @@ hot partititon
 
 
 
-#### 4 
+/zook-
+
+/zook-
+
+
+
+#### 3 
 
 shard/replicas
 
@@ -363,7 +373,117 @@ delete
 
 
 
+## zookeeper选举
 
+zookeeper选举，分两个阶段
+(1)数据恢复阶段
+　　每台服务器在启动前，都会从本地目录找自己所拥有的Zxid(最大事务id),每有一次操作，都是一个事务，每次事务都会递增，事务id越大，事务越新
+(2)选举阶段
+每台zk服务器都会提交一个选举协议，协议中的内容：
+　　①自己的zxid(事务id)
+　　②选举id(myid文件里的数字)
+　　③逻辑时钟值(和选举轮数有关)，作用是确保每台zk服务器处于同一轮选举中
+　　④状态-(Looking)选举状态，Leader，Follower，Observer
+(3)选举PK原则
+　　先比较Zxid,谁大谁当Leader，如果Zxid比较不出来，再比较选举ID，谁大谁当Leader(前提是要满足过半机制)
+　　注意：zookeeper有一个过半存活机制，比如，三台服务器，挂掉一个可以，挂掉两个不能工作
+(4)Leader选举成功之后
+　　首先要做的就是数据同步，目的是确保zk集群的数据一致性，一是可以保证当Leader挂掉之后，其他Follower可以顶替工作，此外要确保客户端无论从哪个zk服务器获取数据都是一致的，这种实现数据一致性的过程称为原子广播(Atomic Brodcast)
+(5)过半性
+　　Zookeeper集群必须有半数以上的机器存活才能正常工作，因为只有满足过半数，才能满足选举机制选出Leader，因为只有过半，在做事务决议时，事务才能更新，所以一般来说，zookeeper集群的数量最好是奇数个
+
+## zk数据与存储
+
+主要分为两部分：
+
+内存数据
+
+　　Zookeeper的数据模型是树结构，在内存数据库中，存储了整棵树的内容，包括所有的节点路径、节点数据、ACL信息，Zookeeper会定时将这个数据存储到磁盘上。
+
+　　1. DataTree
+
+　　DataTree是内存数据存储的核心，是一个树结构，**代表了内存中一份完整的数据**。DataTree不包含任何与网络、客户端连接及请求处理相关的业务逻辑，是一个独立的组件。
+
+　　2. DataNode
+
+　　**DataNode是数据存储的最小单元**，其内部除了保存了结点的数据内容、ACL列表、节点状态之外，还记录了父节点的引用和子节点列表两个属性，其也提供了对子节点列表进行操作的接口。
+
+　　3. ZKDatabase
+
+　　Zookeeper的内存数据库，管理Zookeeper的所有会话、DataTree存储和事务日志。ZKDatabase会定时向磁盘dump快照数据，同时在Zookeeper启动时，会通过磁盘的事务日志和快照文件恢复成一个完整的内存数据库。
+
+磁盘数据
+
+​    磁盘数据主要分为snapshot文件和事务log文件
+
+　　1. snapshot
+
+​    某一时刻内存中的全量数据，一般当事务日志记录超过10W条会生成一份快照文件
+
+​    查看快照文件指令： java -cp /export/servers/zookeeper-3.4.6/zookeeper-3.4.6.[jar:/export/servers/zookeeper-3.4.6/lib/slf4j-api-1.6.1.jar](http://jar/export/servers/zookeeper-3.4.6/lib/slf4j-api-1.6.1.jar) org.apache.zookeeper.server.SnapshotFormatter snapshot.17
+
+　　2. 事务log
+
+​    生成快照之后的事务操作会写入事务log
+
+   查看事务日志文件指令：java -cp /export/servers/zookeeper-3.4.6/zookeeper-3.4.6.[jar:/export/servers/zookeeper-3.4.6/lib/slf4j-api-1.6.1.jar](http://jar/export/servers/zookeeper-3.4.6/lib/slf4j-api-1.6.1.jar) org.apache.zookeeper.server.LogFormatter log.3000000001zookeeper选举
+
+zookeeper选举，分两个阶段
+(1)数据恢复阶段
+　　每台服务器在启动前，都会从本地目录找自己所拥有的Zxid(最大事务id),每有一次操作，都是一个事务，每次事务都会递增，事务id越大，事务越新
+(2)选举阶段
+每台zk服务器都会提交一个选举协议，协议中的内容：
+　　①自己的zxid(事务id)
+　　②选举id(myid文件里的数字)
+　　③逻辑时钟值(和选举轮数有关)，作用是确保每台zk服务器处于同一轮选举中
+　　④状态-(Looking)选举状态，Leader，Follower，Observer
+(3)选举PK原则
+　　先比较Zxid,谁大谁当Leader，如果Zxid比较不出来，再比较选举ID，谁大谁当Leader(前提是要满足过半机制)
+　　注意：zookeeper有一个过半存活机制，比如，三台服务器，挂掉一个可以，挂掉两个不能工作
+(4)Leader选举成功之后
+　　首先要做的就是数据同步，目的是确保zk集群的数据一致性，一是可以保证当Leader挂掉之后，其他Follower可以顶替工作，此外要确保客户端无论从哪个zk服务器获取数据都是一致的，这种实现数据一致性的过程称为原子广播(Atomic Brodcast)
+(5)过半性
+　　Zookeeper集群必须有半数以上的机器存活才能正常工作，因为只有满足过半数，才能满足选举机制选出Leader，因为只有过半，在做事务决议时，事务才能更新，所以一般来说，zookeeper集群的数量最好是奇数个
+
+## zk数据与存储
+
+主要分为两部分：
+
+内存数据
+
+　　Zookeeper的数据模型是树结构，在内存数据库中，存储了整棵树的内容，包括所有的节点路径、节点数据、ACL信息，Zookeeper会定时将这个数据存储到磁盘上。
+
+　　1. DataTree
+
+　　DataTree是内存数据存储的核心，是一个树结构，**代表了内存中一份完整的数据**。DataTree不包含任何与网络、客户端连接及请求处理相关的业务逻辑，是一个独立的组件。
+
+　　2. DataNode
+
+　　**DataNode是数据存储的最小单元**，其内部除了保存了结点的数据内容、ACL列表、节点状态之外，还记录了父节点的引用和子节点列表两个属性，其也提供了对子节点列表进行操作的接口。
+
+　　3. ZKDatabase
+
+　　Zookeeper的内存数据库，管理Zookeeper的所有会话、DataTree存储和事务日志。ZKDatabase会定时向磁盘dump快照数据，同时在Zookeeper启动时，会通过磁盘的事务日志和快照文件恢复成一个完整的内存数据库。
+
+磁盘数据
+
+​    磁盘数据主要分为snapshot文件和事务log文件
+
+　　1. snapshot
+
+​    某一时刻内存中的全量数据，一般当事务日志记录超过10W条会生成一份快照文件
+
+​    查看快照文件指令： java -cp /export/servers/zookeeper-3.4.6/zookeeper-3.4.6.[jar:/export/servers/zookeeper-3.4.6/lib/slf4j-api-1.6.1.jar](http://jar/export/servers/zookeeper-3.4.6/lib/slf4j-api-1.6.1.jar) org.apache.zookeeper.server.SnapshotFormatter snapshot.17
+
+　　2. 事务log
+
+​    生成快照之后的事务操作会写入事务log
+
+   查看事务日志文件指令：java -cp /export/servers/zookeeper-3.4.6/zookeeper-3.4.6.[jar:/export/servers/zookeeper-3.4.6/lib/slf4j-api-1.6.1.jar](http://jar/export/servers/zookeeper-3.4.6/lib/slf4j-api-1.6.1.jar) org.apache.zookeeper.server.LogFormatter log.3000000001
+
+
+
+https://juejin.cn/post/6844903677367418893
 
 
 
