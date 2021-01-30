@@ -254,6 +254,10 @@ public:
 
 
 
+bufferio 
+
+
+
 
 
 - partition.dat: 分区信息
@@ -266,6 +270,20 @@ public:
 - [column].mrk2: 如果定义了自适应索引，则会出现该文件，作用和.mrk文件一样
 - partition.dat、minmax_[column].idx: 定义了分区键，会出现这二个文件，partition存储当前分区下分区表达式最终生成的值，minmax_[column].idx记录当前分区下对应原始数据的最小最大值
 - skp_idx_[Column].idx与skp_idx_[Column].mrk: 二级索引信息
+
+
+
+
+
+100p
+
+高吞吐
+
+低延时
+
+
+
+
 
 
 
@@ -387,6 +405,10 @@ insert into test.part_v1 values
 - partition.dat、minmax_[column].idx: 定义了分区键，会出现这二个文件，partition存储当前分区下分区表达式最终生成的值，minmax_[column].idx记录当前分区下对应原始数据的最小最大值
 - skp_idx_[Column].idx与skp_idx_[Column].mrk: 二级索引信息
 
+
+
+
+
 ## 数据分区
 
 ### 数据的分区规则
@@ -453,6 +475,12 @@ PARTITION BYtoYYYYMM(EventDate)），所以2014年3月份的数据最终会被�
 一行标记数据使用一个元组表示，元组内包含两个整型数值的偏移量信息。对应的.bin压缩文件中，压缩数据块的起始偏移量；以及将该数据压缩块解压后，其未压缩数据的起始偏移量
 每一行标记数据都表示了一个片段的数据（默认8192行）在.bin压缩文件中的读取位置信息。标记数据与一级索引数据不同，它并不能常驻内存，而是使用LRU（最近最少使用）缓存策略加快其取用速度。
 
+
+
+
+
+bitshuffler 
+
 ### 分区、索引、标记和压缩数据的协同总结
 
 #### 写入过程
@@ -467,19 +495,27 @@ PARTITION BYtoYYYYMM(EventDate)），所以2014年3月份的数据最终会被�
 
 如果一条查询语句用不到索引会进行分区目标扫描，虽不能缩小数据范围，但是MergeTree仍然能够借助数据标记，以多线程的形式同时读取多个压缩数据块，以提升性能
 
+
+
 #### 数据标记和压缩数据块的对应关系
 
 每个压缩数据块的体积都被严格控制在64KB～1MB。而一个间隔（index_granularity）的数据，又只会产生一行数据标记，根据一个间隔内数据的实际字节大小，数据标记和压缩数据块之间会产生三种不同的对应关系
+
+
 
 ##### 多对一
 
 多个数据标记对应一个压缩数据块，当一个间隔（index_granularity）内的数据未压缩大小size小于64KB时，会出现这种对应关系。
 ![image](https://segmentfault.com/img/bVbLXMm)
 
+
+
 ##### 一对一
 
 一个数据标记对应一个压缩数据块，当一个间隔（index_granularity）内的数据未压缩大小size大于64KB小于1M时，会出现这种对应关系。
 ![image](https://segmentfault.com/img/bVbLXMx)
+
+
 
 ##### 一对多
 
@@ -515,3 +551,102 @@ ENGINE = MergeTree()
 drwxr-x--- 2 clickhouse clickhouse 6 8月  20 18:54 detached
 -rw-r----- 1 clickhouse clickhouse 1 8月  20 18:54 format_version.txt
 ```
+
+
+
+
+
+
+
+
+
+
+
+column storage
+
+
+
+列存 
+
+索引的索引
+
+每一列数据 排序 字符串 字典编码
+
+
+
+compact min batch
+
+
+
+
+
+事实引擎
+
+压缩 历史数据索引
+
+实时索引
+
+
+
+列压缩 nblock 
+
+parquet 
+
+
+
+Insert delete bit set ,compact 
+
+Update 主键更新
+
+
+
+
+
+k v 
+
+
+
+simd 指令
+
+
+
+avg min max 
+
+
+
+Adb 2-3 熵加 减小
+
+rollup 表 
+
+
+
+
+
+1 榨干系统 driect io page cache
+
+2 simd 指令
+
+3 cpu cache 
+
+jvm 自动 simd
+
+
+
+4 多核 
+
+5 ssd 
+
+nvme cache 
+
+Inter aep 
+
+
+
+
+
+
+
+doris clickhouse
+
+aep 
+
