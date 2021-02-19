@@ -32,7 +32,11 @@
     5. Fix java.lang.ClassCastException [commit](https://github.com/apache/incubator-doris/pull/2667/files)
     6. Proficient in Doris storage design, writing process
   
-- 
+
+
+
+
+
 #### 2 [Yandex  ClickHouse: ](https://github.com/ClickHouse/ClickHouse)
 
   - 个人工作:
@@ -42,6 +46,8 @@
    - Clickhouse [数据段](https://github.com/songenjie/daily_notes/blob/master/2020/7月/工作/clickhouse_数据标记.md)
   2. Clickhouse HA : Clickhouse realizes single machine, multiple copies, multiple clusters, multiple disks, and multiple processes [design](https://www.processon.com/view/link/5f0580e17d9c08442052bfd6) [ppt分享](https://github.com/songenjie/daily_notes/blob/master/2020/8月/工作/clickhouse-扩缩容.pptx)
 3. Realize clickhouse expansion, offline, and replacement plan[design](https://www.processon.com/view/link/5eec8b70e0b34d4dba4879b3)
+
+
 
 
 
@@ -94,26 +100,6 @@
   6. package  go log [project](https://github.com/songenjie/go)
 
 
-
-腾讯 云架构 50%
-
-腾讯云 腾讯内部规划出来的 技术团队 -产品架构平台
-
-云架构平台 - 腾讯云CSI
-
-
-
-mongdb
-
-es
-
-hive
-
-hbase
-
-tsdb
-
-olap
 
 
 
