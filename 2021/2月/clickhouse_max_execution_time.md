@@ -19,7 +19,7 @@ SELECT
     formatReadableSize(written_bytes) AS writesize,
     formatReadableSize(read_bytes) AS readsize
 FROM system.query_log_all
-WHERE (query_start_time > '2021-02-19 11:00:00') AND (type = 'QueryFinish')
+WHERE (query_start_time > '2021-02-21 17:00:00') AND (type = 'QueryFinish')
 ORDER BY query_duration_ms DESC limit 50;
 
 

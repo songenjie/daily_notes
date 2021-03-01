@@ -141,7 +141,7 @@ HTTP协议，以其中的Restful规范为代表，其优势很大。它**可读�
 
 对于以上两点，我画图来一一说明。
 
-![img](https://pic4.zhimg.com/50/v2-f79abd8e489337fafc7aafe75799b599_hd.jpg?source=1940ef5c)![img](https://pic4.zhimg.com/80/v2-f79abd8e489337fafc7aafe75799b599_1440w.jpg?source=1940ef5c)
+![img](https://pic4.zhimg.com/50/v2-f79abd8e489337fafc7aafe75799b599_hd.jpg?source=1940ef5c)
 
 上图是一个比较完整的关系图，这时我们发现HTTP（图中蓝色框）出现了两次。其中一个是和RPC并列的，都是跨应用调用方法的解决方案；另一个则是被RPC包含的，是RPC通信过程的可选协议之一。
 
