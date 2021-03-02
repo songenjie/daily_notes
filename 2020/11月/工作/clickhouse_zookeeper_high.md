@@ -6,9 +6,9 @@ use_minimalistic_part_header_in_zookeeper [极简化zookeeper 数据存储](http
 
 左图为 table_test_local_minimalistic1， 右图为 table_test_local_minimalistic
 
-![A9047327-CE1D-494E-A965-12DA1AD571CF](/Users/songenjie/Library/Application Support/JDTimLine/songenjie/images/A9047327-CE1D-494E-A965-12DA1AD571CF.jpg)
 
 
+![A9047327-CE1D-494E-A965-12DA1AD571CF](../../../source/A9047327-CE1D-494E-A965-12DA1AD571CF.jpg)
 
 
 

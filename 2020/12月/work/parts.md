@@ -50,9 +50,7 @@ ENGINE = Distributed('system_cluster', 'system', 'parts', rand())
 
 ```
 
-![image-20201223175325327](/Users/songenjie/Library/Application Support/typora-user-images/image-20201223175325327.png)
-
-
+![image-20210301200126489](../../../source/image-20210301200126489.png)
 
 
 

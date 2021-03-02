@@ -91,9 +91,7 @@ You can specify any existing ZooKeeper cluster and the system will use a directo
 
 5.1 clickhouse table in zookeeper storage
 
-![image-20210116174208452](/Users/songenjie/Library/Application Support/typora-user-images/image-20210116174208452.png)
-
-
+![image-20210116174208452](../../source/image-20210116174208452.png)
 
 
 
@@ -123,7 +121,7 @@ partition State COLD 的parts 迁移到另外一个集群
 
 5.4  part move
 
-![image-20210116180922216](/Users/songenjie/Library/Application Support/typora-user-images/image-20210116180922216.png)
+![image-20210116180922216](../../source/image-20210116180922216.png)
 
 
 

@@ -1,4 +1,4 @@
-<img src="/Users/songenjie/Library/Application Support/typora-user-images/image-20201113155213959.png" alt="image-20201113155213959" style="zoom:150%;" />
+<img src="../../../mac_images/image-20201113155213959.png" alt="image-20201113155213959" style="zoom:150%;" />
 
 
 

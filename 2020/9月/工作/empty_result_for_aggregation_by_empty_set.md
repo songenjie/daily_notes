@@ -2,11 +2,9 @@ empty_result_for_aggregation_by_empty_set
 
 
 
-![9DA57E28826C6C7DB675D3D08634575E](/Users/songenjie/Library/Application Support/JDTimLine/songenjie/images/9DA57E28826C6C7DB675D3D08634575E.jpg)
 
 
-
-
+![9DA57E28826C6C7DB675D3D08634575E](../../../source/9DA57E28826C6C7DB675D3D08634575E.jpg)
 
 
 
