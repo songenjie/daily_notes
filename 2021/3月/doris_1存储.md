@@ -97,9 +97,9 @@ SegmentFooterPB采用了PB格式进行存储，主要包含了列的meta信息�
 
 # 5 Ordinal Index（一级索引）
 
-Ordinal Index索引提供了通过行号来查找Column Data Page数据页的物理地址。Ordinal Index能够将按列存储数据按行对齐，可以理解为一级索引。其他索引查找数据时，都要通过Ordinal Index查找数据Page的位置。因此，这里先介绍Ordinal Index索引。
+Ordinal Index索引提供了`通过行号来查找Column Data Page数据页的物理地址`。Ordinal Index能够将按列存储数据按行对齐，可以理解为一级索引。其他索引查找数据时，都要通过Ordinal Index查找数据Page的位置。因此，这里先介绍Ordinal Index索引。
 
-在一个segment中，数据始终按照key（AGGREGATE KEY、UNIQ KEY 和 DUPLICATE KEY）排序顺序进行存储，即key的排序决定了数据存储的物理结构。确定了列数据的物理结构顺序，在写入数据时，Column Data Page是由Ordinal index进行管理，Ordinal index记录了每个Column Data Page的位置offset、大小size和第一个数据项行号信息，即Ordinal。这样每个列具有按行信息进行快速扫描的能力。Ordinal index采用的稀疏索引结构，就像是一本书目录，记录了每个章节对应的页码。
+在一个segment中，数据始终按照key（AGGREGATE KEY、UNIQ KEY 和 DUPLICATE KEY）排序顺序进行存储，即key的排序决定了数据存储的物理结构。确定了列数据的物理结构顺序，在写入数据时，Column Data Page是由Ordinal index进行管理，Ordinal index记录了每个	Column Data Page	的位置`offset、大小size`和第一个`数据项行号信息`，即Ordinal。这样每个列具有按行信息进行快速扫描的能力。Ordinal index采用的稀疏索引结构，就像是一本书目录，记录了每个章节对应的页码。
 
 
 
@@ -109,7 +109,7 @@ Ordinal index元信息存储在SegmentFooterPB中的每个列的OrdinalIndexMeta
 
 ![img](https://oscimg.oschina.net/oscnet/up-2aead9e1d2e33b2019d1dfadb706fd87434.png)
 
-在OrdinalIndexMeta中存放了索引数据对应的root page地址，这里做了一些优化，当数据仅有一个page时，这里的地址可以直接指向唯一的数据page；当一个page放不下时，指向OrdinalIndex类型的二级结构索引page，索引数据中每个数据项对应了Column Data Page offset位置、size大小和ordinal行号信息。其中Ordinal index索引粒度与page粒度一致，默认64*1024字节。
+在OrdinalIndexMeta中存放了索引数据对应的root page地址，这里做了一些优化，当数据仅有一个page时，这里的地址可以直接指向唯一的数据page；当一个page放不下时，指向OrdinalIndex类型的二级结构索引page，索引数据中每个数据项对应了Column Data Page offset位置、size大小和ordinal行号信息。其中Ordinal index索引粒度与page粒度一致，默认64*1024字节。64KB
 
 
 
@@ -147,13 +147,19 @@ Page Footer包含了Page类型Type、UncompressedSize未压缩时的数据大小
 
 
 
+short key index : 固定行数
+
+ordinal index: 固定大小 64k 16page
+
+
+
 # 7、Short Key Index索引
 
 
 
 ## 7.1 存储结构
 
-Short Key Index前缀索引，是在key（AGGREGATE KEY、UNIQ KEY 和 DUPLICATE KEY）排序的基础上，实现的一种根据给定前缀列，快速查询数据的索引方式。这里Short Key Index索引也采用了稀疏索引结构，在数据写入过程中，每隔一定行数，会生成一个索引项。这个行数为索引粒度默认为1024行，可配置。该过程如下图所示：
+Short Key Index前缀索引，是在key（AGGREGATE KEY、UNIQ KEY 和 DUPLICATE KEY）排序的基础上，实现的一种根据给`定前缀列`，`快速查询数据`的索引方式。这里Short Key Index索引也采用了`稀疏索引结构`，在数据写入过程中，`每隔一定行数，会生成一个索引项`。这个行数为索引粒度默认为`1024`行，可配置。该过程如下图所示：
 
 ![img](https://oscimg.oschina.net/oscnet/up-e7e164ecf02e1d15c0c15e6bfb9a94e87ec.png)
 
@@ -207,7 +213,7 @@ SELECT * FROM table WHERE age=20；
 
 # 8、ZoneMap Index索引
 
-ZoneMap索引存储了Segment和每个列对应每个Page的统计信息。这些统计信息可以帮助在查询时提速，减少扫描数据量，统计信息包括了Min最大值、Max最小值、HashNull空值、HasNotNull不全为空的信息。
+ZoneMap索引存储了Segment和每个列对应每个Page的统计信息。这些统计信息可以帮助在查询时提速，减少扫描数据量，`统计信息包括了Min最大值、Max最小值、HashNull空值、HasNotNull不全为空的信息`。
 
 
 
@@ -259,7 +265,7 @@ BloomFilterIndex信息存放了生产的Hash策略、Hash算法和BloomFilter过
 
 ## 9.2、索引生成规则
 
-BloomFilter按Page粒度生成，在数据写入一个完整的Page时，Doris会根据Hash策略同时生成这个Page的BloomFilter索引数据。目前bloom过滤器不支持tinyint/hll/float/double类型，其他类型均已支持。使用时需要在PROPERTIES中指定bloom_filter_columns要使用BloomFilter索引的字段。
+BloomFilter按`Page`粒度生成，在数据写入一个完整的Page时，Doris会根据`Hash`策略同时生成这个`Page`的BloomFilter索引数据。目前bloom过滤器不支持tinyint/hll/float/double类型，其他类型均已支持。使用时需要在PROPERTIES中指定bloom_filter_columns要使用BloomFilter索引的字段。
 
 
 

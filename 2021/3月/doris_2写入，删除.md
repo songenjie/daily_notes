@@ -25,7 +25,7 @@ Doris 微信公众号：
 - FE：Frontend，即 Doris 的前端节点。主要负责接收和返回客户端请求、元数据以及集群管理、查询计划生成等工作。
 - BE：Backend，即 Doris 的后端节点。主要负责数据存储与管理、查询计划执行等工作。
 - Tablet：Tablet是一张表实际的物理存储单元，一张表按照分区和分桶后在BE构成分布式存储层中以Tablet为单位进行存储，每个Tablet包括元信息及若干个连续的RowSet。
-- Rowset：Rowset是Tablet中一次数据变更的数据集合，数据变更包括了数据导入、删除、更新等。Rowset按版本信息进行记录。每次变更会生成一个版本。
+- Rowset：Rowset是Tablet中一次数据变更的数据集合，`数据变更包括了数据导入、删除、更新`等。Rowset按版本信息进行记录。每次变更会生成一个版本。
 - Version：由Start、End两个属性构成，维护数据变更的记录信息。通常用来表示Rowset的版本范围，在一次新导入后生成一个Start，End相等的Rowset，在Compaction后生成一个带范围的Rowset版本。
 - Segment：表示Rowset中的数据分段。多个Segment构成一个Rowset。
 - Compaction：连续版本的Rowset合并的过程成称为Compaction，合并过程中会对数据进行压缩操作。
@@ -44,8 +44,8 @@ Doris针对不同场景支持了多种形式的数据写入方式，其中包括
 
 1. FE接收用户的写入请求，并随机选出BE作为Coordinator BE。将用户的请求重定向到这个BE上。
 2. Coordinator BE负责接收用户的数据写入请求，同时请求FE生成执行计划并对调度、管理导入任务LoadJob和导入事务。
-3. Coordinator BE调度执行导入计划，执行对数据校验、清理之后。
-4. 数据写入到BE的存储层中。在这个过程中会先写入到内存中，写满一定数据后按照存储层的数据格式写入到物理磁盘上。
+3. `Coordinator BE调度执行导入计划，执行对数据校验、清理`之后。
+4. 数据写入到BE的存储层中。在这个过程中会先写入到`内存`中，写满一定`数据`后`按照存储层的数据格式`写入到物理磁盘上。
 
 本文主要介绍数据写入到BE存储层的详细流程。其余流程不在详细描述。·
 
@@ -126,17 +126,17 @@ Memtable中采用了跳表的结构对数据进行排序，排序规则使用了
 
 ## 4.1 DELETE 执行流程
 
-DELETE的支持一般的删除操作，实现较为简单，DELETE模式下没有对数据进行实际删除操作，而是对数据删除条件进行了记录。存储在Meta信息中。当执行Base Compaction时删除条件会一起被合入到Base版本中。Base版本为Tablet从[0-x]的第一个Rowset数据版本。具体流程如下：
+DELETE的支持一般的删除操作，实现较为简单，DELETE模式下`没有对数据进行实际删除操作`，而是对`数据删除条件进行了记录`。存储在`Meta`信息中。当执行`Base Compaction`时删除条件会一起被合入到Base版本中。Base版本为Tablet从[0-x]的第一个Rowset数据版本。具体流程如下：
 
 1. 删除时由FE直接下发删除命令和删除条件。
-2. BE在本地启动一个EngineBatchLoadTask任务，生成新版本的Rowset，并记录删除条件信息。这个删除记录的Rowset与写入过程的略有不同，该Rowset仅记录了删除条件信息，没有实际的数据。
-3. FE同样发布生效版本。其中会将Rowset加入到Tablet中，保存TabletMeta信息。
+2. BE在本地启动一个EngineBatchLoadTask任务，`生成新版本的Rowse`t，并记录删除条件信息。这个删除记录的Rowset与写入过程的略有不同，`该Rowset仅记录了删除条件信息，没有实际的数据`。
+3. FE同样发布`生效版本`。其中会将Rowset加入到Tablet中，保存TabletMeta信息。
 
 
 
 ## 4.2 LOAD_DELETE 执行流程
 
-LOAD_DELETE支持了在UNIQUE KEY模型下，实现了通过批量导入要删除的key对数据进行删除，能够支持大量数据删除能力。整体思路是在数据记录中加入删除状态标识，在Compaction流程中会对删除的key进行压缩。Compaction主要负责将多个Rowset版本进行合并，Compaction流程会在后续的文章中进行详细介绍。
+LOAD_DELETE支持了在UNIQUE KEY模型下，实现了通过批量导入要删除的key对数据进行删除，能够支持大量数据删除能力。整体思路是在`数据记录中加入删除状态标识`，在Compaction流程中会对删除的key进行压缩。Compaction主要负责将多个Rowset版本进行合并，Compaction流程会在后续的文章中进行详细介绍。
 
 目前LOAD_DELETE功能正在研发中，近期的Doris版本会进行发布。
 
