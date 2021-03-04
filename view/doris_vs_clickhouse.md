@@ -72,21 +72,21 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 元数据一致性 轻量 更好一些
 
 副本一致性
+
+
+
+usercache
+
+pagechace
+
+os cache
+
+Direct io
+
+
 
 
 
