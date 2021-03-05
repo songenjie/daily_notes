@@ -4,60 +4,6 @@
 
 
 
-raft
-
-
-
-watcher 
-
-
-
-btree
-
-
-
-
-
-COMMIT INDEX    最大的
-
-APPLY INDEX.      
-
-COMPACT INDEX  
-
-
-
-snapshot index  < apply index 
-
-
-
-
-
-
-
-etcd  grpc 多路复用
-
-
-
-
-
-100个并发
-
-高并发
-
-
-
-Etched 2g-8g. 80g
-
-
-
-Key 版本控制 value 
-
-
-
-
-
-
-
 | Feature              | Consul                 | zookeeper             | etcd              | euerka                       |
 | :------------------- | :--------------------- | :-------------------- | :---------------- | :--------------------------- |
 | 服务健康检查         | 服务状态，内存，硬盘等 | (弱)长连接，keepalive | 连接心跳          | 可配支持                     |

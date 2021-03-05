@@ -17,8 +17,6 @@
 
 
 
-
-
 image.png
 
 - 数据组织方式 传统OLAP根据数据存储组织方式的不同分为 ROLAP（relational olap）以及 MOLAP（multi-dimension olap） 

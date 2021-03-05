@@ -1,10 +1,6 @@
 ClickHouse在处理对分布式表的查询时，会将查询拆分成对本地表的查询，这里称之为“部分查询”，然后在第一个接收到查询的节点将部分查询结果进行合并
 
-
-
-![img](https://cf.jd.com/download/attachments/401966435/image2020-12-10_15-58-17.png?version=1&modificationDate=1607587098000&api=v2)
-
-
+![1FE1AA4D-185E-42F7-8000-48A6DCFAF5EE](1FE1AA4D-185E-42F7-8000-48A6DCFAF5EE.jpg)
 
 那么对于向Join和In(包含子查询)这样的包含多个分布式表的查询，ClickHouse如何处理呢？
 
@@ -26,9 +22,7 @@ PS：woo.student woo.score为分布式表，以“_l”结尾的表为本地表
 
 
 
-![img](https://cf.jd.com/download/attachments/401966435/image2020-12-10_15-43-15.png?version=1&modificationDate=1607586681000&api=v2)
-
-
+![006DF0D3-C831-4058-BFCF-284CC6FB9E94](006DF0D3-C831-4058-BFCF-284CC6FB9E94.jpg)
 
 假如集群总共100的分片，需要100*100次部分查询
 
@@ -58,7 +52,7 @@ PS：woo.student woo.score为分布式表，以“_l”结尾的表为本地表
 
 
 
-![img](https://cf.jd.com/download/attachments/401966435/image2020-12-10_15-44-35.png?version=1&modificationDate=1607586681000&api=v2)
+<img src="7EF5550C-FBEC-422A-B14C-6344AB61ED49.jpg" alt="7EF5550C-FBEC-422A-B14C-6344AB61ED49"  />
 
 假如总共100的分片，需要2 * 100次部分查询
 
@@ -122,7 +116,7 @@ PS：woo.student woo.score为分布式表，以“_l”结尾的表为本地表
 
 
 
-![img](https://cf.jd.com/download/thumbnails/401966435/image2020-12-11_14-35-16.png?version=1&modificationDate=1607668517000&api=v2)
+![054BB5A0-C87A-4239-8421-D1F46A37EF90](054BB5A0-C87A-4239-8421-D1F46A37EF90.jpg)
 
 
 

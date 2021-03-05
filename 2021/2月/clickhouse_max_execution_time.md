@@ -1,13 +1,3 @@
-```
-
-```
-
-
-
-time size 
-
-
-
 ```sql
 SELECT
     query_start_time,

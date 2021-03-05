@@ -1,26 +1,3 @@
-- [1 引擎研究](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-1引擎研究)
-  - [1.1 高可用架构](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-1.1高可用架构)
-  - [1.2 高并发和查询优化](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-1.2高并发和查询优化)
-    - [1.2.1 SQL引擎（吴建超 ）](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-1.2.1SQL引擎（）)
-    - [1.2.2 执行引擎 （@阳仔）](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-1.2.2执行引擎（@阳仔）)
-  - [1.3 数据存储（吴建超 ） ](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-1.3数据存储（）)
-  - [1.4 多场景低延时写入](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-1.4多场景低延时写入)
-- [2 集群部署和业务支持](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-2集群部署和业务支持)
-  - [2.1 多租户、权限和配额 ](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-2.1多租户、权限和配额)
-  - [2.2 容器化和存储计算分离 @阳仔](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-2.2容器化和存储计算分离@阳仔)
-  - [2.3 应用案例和业务支持](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-2.3应用案例和业务支持)
-  - [2.4 构建测试集](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-2.4构建测试集)
-- [3 管控面产品化（李阳、高明、王倩）](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-3管控面产品化（李阳、高明、王倩）)
-  - [3.1 部署和配置下发](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-3.1部署和配置下发)
-  - [3.2 管理后台](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-3.2管理后台)
-  - [3.3 用户前台](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-3.3用户前台)
-  - [3.4 监控报警](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-3.4监控报警)
-  - [3.5 导入服务化](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-3.5导入服务化)
-- [4. 618之后的规划](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-4.618之后的规划)
-- [参考资料](https://cf.jd.com/pages/viewpage.action?pageId=384189857#OLAP研究方向-参考资料)
-
-
-
 包含Clickhouse、Doris等OLAP引擎
 
 ## 1 引擎研究
@@ -31,15 +8,15 @@
 
 方向：
 
-1. 元数据同步，暂不具备 P0 @海波、 [王高明](https://cf.jd.com/display/~wanggaoming1)
-2. 多副本同步，这块强依赖ZK，ZNode占比高 P1 [宋恩杰](https://cf.jd.com/display/~songenjie)
-3. 查询、写入、DDL操作的高可用研究 P1 恩杰      
-   1. 查询通过域名，需要配置IP映射，不利于配额限制，不方便节点变更 - 建议通过反向代理，推荐用官方的连接库 （@阳仔 [王高明](https://cf.jd.com/display/~wanggaoming1) ）
-   2. 写入是业务方做的容错处理，建议通过CHProxy来转发，分布式表+本地表 （@阳仔 [王高明](https://cf.jd.com/display/~wanggaoming1) [王倩](https://cf.jd.com/display/~wangqian445) ）
+1. 元数据同步，暂不具备 P0
+2. 多副本同步，这块强依赖ZK，ZNode占比高 P1
+3. 查询、写入、DDL操作的高可用研究 P1  
+   1. 查询通过域名，需要配置IP映射，不利于配额限制，不方便节点变更 - 建议通过反向代理，推荐用官方的连接库 
+   2. 写入是业务方做的容错处理，建议通过CHProxy来转发，分布式表+本地表 
    3. 节点故障DDL操作是无法执行的，需要手工下线后，用节点恢复工具 P0
-4. 故障节点自动下线，扩容自动上线 P0 @海波、@建超
+4. 故障节点自动下线，扩容自动上线 P0 
    1. 支持故障节点下线和上线
-5. 集群扩缩容 P1 @海波 @建超 @阳仔
+5. 集群扩缩容 P1
    1. 扩分片、扩副本
    2. 扩容后数据均衡
 6. 简化配置操作
@@ -57,7 +34,7 @@
 4. 表引擎、字段、字段类型、索引、物化视图对性能的优化影响
 5. Explain - ClickHouse下个版本21.0 P1
 
-#### 1.2.1 SQL引擎（[吴建超](https://cf.jd.com/display/~wujianchao5) ）
+#### 1.2.1 SQL引擎
 
 1. AST生成流程
 2. **query optimization P2**
@@ -73,7 +50,7 @@
 5. 其它提升性能的设计
 6. **distributed join性能低 P2**
 
-### 1.3 数据存储（[吴建超](https://cf.jd.com/display/~wujianchao5) ） 
+### 1.3 数据存储
 
 1. 数据合并策略 P2
    1. 加快合并或减缓合并
@@ -101,10 +78,10 @@
 
 ### 2.1 多租户、权限和配额 
 
-1. 多租户的CPU/内存/磁盘/连接数/查询/插入等配额限制   （ [王倩](https://cf.jd.com/display/~wangqian445) [吴建超](https://cf.jd.com/display/~wujianchao5) ）
+1. 多租户的CPU/内存/磁盘/连接数/查询/插入等配额限制  
 2. 多租户的数据分组按节点控制，逻辑集群 P2
 
-### 2.2 容器化和存储计算分离 @阳仔
+### 2.2 容器化和存储计算分离 
 
 1. JDOS容器化部署OLAP   ( [王倩](https://cf.jd.com/display/~wangqian445) )
 2. 数据存储在ChuBao/Hive中
@@ -127,7 +104,7 @@
 ### 3.1 部署和配置下发
 
 1. 对接CI/CD程序通过鲲鹏发布
-2. 配置文件修改通过阿波罗分发（[吴建超](https://cf.jd.com/display/~wujianchao5) ）
+2. 配置文件修改通过阿波罗分发
 
 ### 3.2 管理后台
 
