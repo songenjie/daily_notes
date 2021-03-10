@@ -3,7 +3,7 @@
 
 ```
 
-# clickhouse 3 亿 join 百万 500ms 查询时间
+# clickhouse 3 亿 join 百万,  查询时间500ms 优化
 
 
 
@@ -129,4 +129,6 @@ WHERE (skudict.bu_id = '1727') AND (skudict.dept_id_1 = '33') AND (fact.total_sk
 
 5. 操作流程
 
-... 设计隐私数据 
+... 设计隐私数据 [可参数 clickhouse join 文章](https://github.com/songenjie/daily_notes/blob/master/2021/3%E6%9C%88/clickhouse_join.md)
+
+实现细节主要为，根据id,将数据进行分片，是的id相同的两张表的数据，落入相同的分片中，使用 分布式表join 本地表的方式，下发后，直接在各分片  本地表join本地表，聚合后数据即为准确数据，实现 colocate join
