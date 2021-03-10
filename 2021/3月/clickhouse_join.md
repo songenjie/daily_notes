@@ -1,11 +1,5 @@
 ClickHouse在处理对分布式表的查询时，会将查询拆分成对本地表的查询，这里称之为“部分查询”，然后在第一个接收到查询的节点将部分查询结果进行合并
 
-
-
-![img](https://cf.jd.com/download/attachments/401966435/image2020-12-10_15-58-17.png?version=1&modificationDate=1607587098000&api=v2)
-
-
-
 那么对于向Join和In(包含子查询)这样的包含多个分布式表的查询，ClickHouse如何处理呢？
 
 
@@ -26,9 +20,7 @@ PS：woo.student woo.score为分布式表，以“_l”结尾的表为本地表
 
 
 
-![img](https://cf.jd.com/download/attachments/401966435/image2020-12-10_15-43-15.png?version=1&modificationDate=1607586681000&api=v2)
-
-
+![2DD936E7-9FFB-46C2-9EA5-2B4CB07532E4](2DD936E7-9FFB-46C2-9EA5-2B4CB07532E4.jpg)
 
 假如集群总共100的分片，需要100*100次部分查询
 
@@ -58,55 +50,13 @@ PS：woo.student woo.score为分布式表，以“_l”结尾的表为本地表
 
 
 
-![img](https://cf.jd.com/download/attachments/401966435/image2020-12-10_15-44-35.png?version=1&modificationDate=1607586681000&api=v2)
+![D4EA9193-4CEE-4863-9CFD-E637A638F19A](D4EA9193-4CEE-4863-9CFD-E637A638F19A.jpg)
 
 假如总共100的分片，需要2 * 100次部分查询
 
-## 3. In执行流程（包含子查询）
-
-包含子查询的in查询与Join执行流程类似
-
-> select sum(score) from woo.score where id in (select id from woo.student as c_006);
 
 
-
-\1. 向每个分片分发请求，以计算woo.score的每个本地表的部分查询结果
-
-> SELECT sum(score) FROM woo.score_l WHERE id IN ((SELECT id FROM woo.student AS c_006) AS _subquery6)
-
-\2. 当分片收到1中的sql请求后，需要计算子查询的结果，所以向每个分片分发请求（展开第二个分布式表）
-
-> SELECT id FROM woo.student_l AS c_006
-
-假如总共100的分片，需要100*100次部分查询
-
-## 4. Global in执行历程（包含子查询）
-
-包含子查询的Global in查询与Global Join执行流程类似
-
-> select sum(score) from woo.score where id global in (select id from woo.student as c_002) ;
-
-\1. 首先计算子查询的结果，并存储为临时表 _subquery3，此时展开第一个分布式表
-
-每个分片分发请求
-
-> SELECT id FROM woo.student_l AS c_002
-
-合并结果成一张临时表 _subquery3
-
-
-
-\2. 将临时表_subquery3发到所有分片计算部分结果，此时展开第二个分布式表
-
-> SELECT sum(score) FROM woo.score_l WHERE id GLOBAL IN (_subquery3)
-
-\3. 合并2中的结果，为最终结果
-
-假如总共100的分片，需要2*100次部分查询
-
-
-
-## 5. colocate Join
+## 3. colocate Join
 
 假设woo.student和woo.score 两个表严格按照id字段将数据hash散列到不同的节点上，那么Join可以采用一种非常高效的方式，colocate Join（本地Join），sql中将右表直接用本地表代替，具体如下：
 
@@ -122,7 +72,7 @@ PS：woo.student woo.score为分布式表，以“_l”结尾的表为本地表
 
 
 
-![img](https://cf.jd.com/download/thumbnails/401966435/image2020-12-11_14-35-16.png?version=1&modificationDate=1607668517000&api=v2)
+![1B588759-50C0-42CD-B929-1D499862203C](1B588759-50C0-42CD-B929-1D499862203C.jpg)
 
 
 
