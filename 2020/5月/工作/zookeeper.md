@@ -178,7 +178,7 @@ echo "3" > /opt/zookeeper/data/myid
 注意：报错排查
 ![Zookeeper集群搭建Zookeeper集群搭建](https://www.linuxprobe.com/wp-content/uploads/2016/08/08-26-6.png)
 
-Zookeeper节点启动不了可能原因：zoo.cfg配置文件有误、iptables没关。
+Zookeeper节点启动不了可能原因：zoo.cfg配置文件有误、iptables没关。\
 
 **2、启动完成之后查看每个节点的状态**
 
