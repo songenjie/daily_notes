@@ -1,13 +1,13 @@
 - ## 个人信息
 
-  - 姓名： 宋恩杰
+  - 姓名： 宋先生
   - 英文名：Jason
   - 应聘岗位： 大数据-OLAP-研发工程师
   - 工作经历：2018/07-至今  京东(技术与数据中台-软件开发)-校招
   - 学历： 本科 长安大学(211)-时间(2014/09-2018/07)
   - 工作地：北京
   - 邮箱：turbo_json@qq.com
-  - 电话： 153-1350-4109
+  - 电话： 173-4671-2022
 
   
 
@@ -29,10 +29,10 @@
   - 个人工作：
     1. Fix be log not rotate bug [commit](https://github.com/songenjie/incubator-doris/commit/95764a54c0711181361cec726cb9b1faacef4f43)
     2. Suport json data type import [commit](https://github.com/songenjie/incubator-doris/commit/26c0e6fb55bd3660c02c0c9fc62e5472d894f69c)
-    3. Support users with high QPS in the same query through result set cache[commits](https://github.com/apache/incubator-doris/pull/4284/files)
+    3. Support users with high QPS in the same query through result set cache. [cache docs commits](https://github.com/apache/incubator-doris/pull/4479)  [commits](https://github.com/apache/incubator-doris/pull/4284/files)
     4. Support importing Doris through hive sql [commits](https://github.com/songenjie/incubator-doris/commit/043d80586963d9a22c3d21517d9c6fcc3c54ed4e)
     5. Fix java.lang.ClassCastException [commit](https://github.com/apache/incubator-doris/pull/2667/files)
-    6. Proficient in Doris storage design, writing process
+    6. Proficient in Doris storage design, writing process [link](https://github.com/songenjie/daily_notes/blob/master/2021/3%E6%9C%88/doris_1%E5%AD%98%E5%82%A8.md)
   
 
 
@@ -40,13 +40,14 @@
 #### 2 [Yandex  ClickHouse: ](https://github.com/ClickHouse/ClickHouse)
 
   - 个人工作:
-    1. Proficient in Doris storage design, writing process
+    1. Proficient in Doris storage design, writing process 
        - Clickhouse Struct : [persion struct jpg](https://github.com/songenjie/daily_notes/blob/master/source/clickhouse_storage1.jpg)         [struct](https://www.processon.com/view/link/5eec71e4e401fd1fd2a026b2)           [源码分析](https://github.com/songenjie/daily_notes/blob/master/2020/7月/工作/读clickhouse原理解析与应用实践有感.md) 
-       - Clickhouse [数据段](https://github.com/songenjie/daily_notes/blob/master/2020/7月/工作/clickhouse_数据标记.md)
-    2. Clickhouse HA : Clickhouse realizes single machine, multiple copies, multiple clusters, multiple disks, and multiple processes [design](https://www.processon.com/view/link/5f0580e17d9c08442052bfd6) [ppt分享](
+       - Clickhouse [数据段](https://github.com/songenjie/daily_notes/blob/master/2020/7月/工作/clickhouse_数据标记.md)  [存储](https://github.com/songenjie/daily_notes/blob/master/view/clickhouse-storage.md)
+    2. Clickhouse HA : Clickhouse realizes single machine, multiple copies, multiple clusters, multiple disks, and multiple processes [design](https://www.processon.com/view/link/5f0580e17d9c08442052bfd6) 
     3. Realize clickhouse expansion, offline, and replacement plan[design](https://www.processon.com/view/link/5eec8b70e0b34d4dba4879b3)
     4. clickhouse  hot/cold  metadata design 
-    5. clickhouse  raft server  coordinator
+    5. clickhouse  raft server  coordinator 
+    6. clickhouse  copier improve[commit](https://github.com/ClickHouse/ClickHouse/pull/21912)
 
  
 
@@ -62,10 +63,11 @@
 
 - 个人影响力
   1. jdolap doris 、clickhouse 双十一 大促保障 
-  2. jdolap doris 集团内大规模宣讲
-  3. jdolap doris 社区内宣讲-得到业界肯定
-  4. jdolap clickhouse 团队内多次技术分享-团队技术深入交流
-  5. ...
+  2. clickhouse 技术文档 公众号推广[link](https://mp.weixin.qq.com/s/4iboriiZMo-QQ0FSOoU-Fg)
+  3. jdolap doris 集团内大规模宣讲,公众号推广
+  4. jdolap doris 社区内宣讲-得到业界肯定 [link](https://mp.weixin.qq.com/s/YgsHXIbdaW3hn1RVnkDRVA)
+  5. jdolap clickhouse 团队内多次技术分享-团队技术深入交流
+  6. ...
 
 
 
