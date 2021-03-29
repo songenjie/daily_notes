@@ -13,12 +13,10 @@
 
   ## 个人项目经历
 
-  
-
   ### JD OLAP 
 
   - 时间：2019/04-至今 
-  
+
 - 项目简介： OLAP解决PB级数据存储、即席查询、高效准确去重、满足多种数据源接入、兼容多种数据类型、监控Mysql协议、列式存储、高可用高并发的事实数据分析系统 平台目前主要使用 Doris,Clickhouse 两个开源产品,前期工作Doris为主，后期工作Clickhouse为主
 
 
@@ -37,6 +35,8 @@
 
 
 
+
+
 #### 2 [Yandex  ClickHouse: ](https://github.com/ClickHouse/ClickHouse)
 
   - 个人工作:
@@ -47,9 +47,13 @@
     3. Realize clickhouse expansion, offline, and replacement plan[design](https://www.processon.com/view/link/5eec8b70e0b34d4dba4879b3)
     4. clickhouse  hot/cold  metadata design 
     5. clickhouse  raft server  coordinator 
-    6. clickhouse  copier improve[commit](https://github.com/ClickHouse/ClickHouse/pull/21912)
+    6. clickhouse  copier improve [commit](https://github.com/ClickHouse/ClickHouse/pull/21912)
 
  
+
+
+
+
 
 -  工作内容：
    1. JD OLAP Doris ClickHouse版本维护,bug 修复等一系列工作 如上个人工作

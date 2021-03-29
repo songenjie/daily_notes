@@ -72,6 +72,72 @@
 
 
 
+Doris OLAP 与Clickhouse MergeTree 都是类hbase LSM实现，写优化于读。
+
+Clickhouse支持Vectorized与SIMD。Doris支持Vectorized，Simd在收费版本才有。
+
+SIMD指令对大数据处理有10倍+提速，计算性能来说，使用SIMD比开源的Doris更快。
+
+Clickhouse单机每秒50M-200M插入性能，对于单记录1KB大小，每秒5万-20万插入性能。
+
+
+
+doris 支持一个维度的查询更新
+
+clickhouse 需要一些函数操作手段才能达到
+
+
+
+
+
+分布式的设计
+
+Clickhouse需要人工创建local和distribute表，这点不如Doris方便，Doris OLAP engine默认为distribute表，单机即为local。
+
+Clickhouse local表转为distribute表两种操作可选：1.在每台机器运行create local table操作，然后在某台机器运行create distribute操作，巨麻烦。2.事前在配置文件里面配置shard与replica，create table时使用on cluster 
+
+
+
+
+
+查询引擎也不好
+
+
+
+
+
+
+
+
+
+1 导入数据Clickhouse快
+2 数据压缩率Clickhouse好
+3 单表查询Clickhouse快
+4 Join查询两者各有优劣，数据量小情况下Clickhouse好，数据量大Doris好
+5 Doris对SQL支持情况要好
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 元数据一致性 轻量 更好一些
 
 副本一致性
@@ -140,8 +206,6 @@ Direct io
 
 
 
-
-
 读少 写入也少 读写理论上同步即可 broker 是非常需要的 broker 我理解就是部门flink 程序 
 
 
@@ -162,170 +226,128 @@ Direct io
 
 
 
-- 索引
-  - 二分查找
-  - 结合磁盘属性
-  - 
+
+
+1. 架构
+
+架构 都是不错的引擎 对外围的大数据的组件依赖性都很低
+
+clickhouse : 纯列的存储 ,值为单一的文件
+
+Doris: mpp 的olap 引擎 **大规模并行分析（MPP）数据库（Analytical Massively Parallel Processing (MPP)** 结合了 mesa,imapala,apache orc
+
+
+
+
+
+2. 查询
+
+单机查询快的主要原因：
 
 ClickHouse在计算层做了非常细致的工作，竭尽所能榨干硬件能力，提升查询速度。它实现了单机多核并行、分布式计算、向量化执行与SIMD指令、代码生成等多种重要技术
 
+Doris OLAP 与Clickhouse MergeTree 都是类hbase LSM实现，写优化于读。
 
+Clickhouse支持Vectorized与SIMD。Doris支持Vectorized，Simd在收费版本才有。
 
+SIMD指令对大数据处理有10倍+提速，计算性能来说，使用SIMD比开源的Doris更快。
 
+Clickhouse单机每秒50M-200M插入性能，对于单记录1KB大小，每秒5万-20万插入性能。
 
-Merge 
+- [*SQL*](https://zh.wikipedia.org/wiki/SQL)*支持。* Clickhouse支持类似[SQL](https://zh.wikipedia.org/wiki/SQL)的扩展语言，包括数组和嵌套数据结构、近似函数和[URI](https://zh.wikipedia.org/wiki/统一资源标志符)函数，以及连接外部键值存储的可用性。
 
-Order by 最终去重
+- *高性能。*[[12\]](https://zh.wikipedia.org/wiki/ClickHouse#cite_note-:2-12)
 
-Replicaing 通过某一个列最新时间戳
+o  使用向量计算。数据不仅由列存储，而且由向量处理（一部分列）。这种方法可以实现高[CPU](https://zh.wikipedia.org/wiki/中央处理器)性能。
 
-CollapsingMerge: sign
+多台机器 经常因为查询引擎的限制，节点之间数据交互。用户为了粗暴的保证数据查询到正确行，类似broadcast join 比较频繁，出现shuffler的情况
 
-VersionedCollapsingMerge: sign + version 
+l **数据压缩：**在一些列式数据库管理系统中(例如：InfiniDB CE 和 MonetDB) 并没有使用数据压缩。但是, 若想达到比较优异的性能，数据压缩确实起到了至关重要的作用。
 
+l **多核心并行处理：**ClickHouse会使用服务器上一切可用的资源，从而以最自然的方式并行处理大型查询。
 
+l **多服务器分布式处理[:](https://clickhouse.tech/docs/zh/introduction/distinctive_features/#duo-fu-wu-qi-fen-bu-shi-chu-li)**上面提到的列式数据库管理系统中，几乎没有一个支持分布式的查询处理。
+在ClickHouse中，数据可以保存在不同的shard上，每一个shard都由一组用于容错的replica组成，查询可以并行地在所有shard上进行处理。这些对用户来说是透明的
 
-查询 
+l **向量引擎[:](https://clickhouse.tech/docs/zh/introduction/distinctive_features/#xiang-liang-yin-qing)**为了高效的使用CPU，数据不仅仅按列存储，同时还按向量(列的一部分)进行处理，这样可以更加高效地使用CPU。
 
-Replicing sql执行max最新的，且只能做模型中更新的场景，sum,avg就不是和了
+l 列式存储+**索引:**按照主键对数据进行排序，这将帮助ClickHouse在几十毫秒以内完成对数据特定值或范围的查找。
 
-CollapsingMerge: sign是正负情况，两个行抵消的情况 sum(sign*Column) 结果为0 
 
-VersionCollapsingMerge: sign 基础上加一层 version控制，对用户使用就比较苛刻了
 
 
 
+3. 存储
 
+各有优劣势，doris由fe统一管理元数据，clickhouse 元数据存储到zookeeper ,自己来管理
 
 
 
 
 
+4. 模型
 
+clickhouse 模型比 doris 要多一些
 
-### Why Not Other ROLAP
+但是 doris 使用上要比click house 好很多，doris 也基本都可以满足c lickhouse 现在的情况
 
-我们当时主要调研了 SQL on Hadoop，ClickHouse，SnappyData，TiDB，Doris 等系统， 这些系统都是优秀的开源系统，并且都有其适用场景。我们在选型时主要从功能，架构，性能，易用性，运维成本等几个维度去考虑。
 
-下面我先介绍下我们为什么没有选择这些系统，再介绍我们为什么选择了 Doris。
 
-- **SQL on Hadoop 系统**：无法支持更新，性能也较差。
-- **TiDB**： TiDB 虽然当初号称可以支撑 100%的 TP 和 80%的 AP，但是架构设计主要是面向 TP 场景，缺少针对 AP 场景专门的优化，所以 OLAP 查询性能较差，TiDB 团队目前正在研发专门的 OLAP 产品：TiFlash，TiFlash 具有以下特点：列存，向量化执行，MPP，而这些特点 Doris 也都有。
-- **SnappyData**：SnappyData 是基于 Spark + GemFire 实现的内存数据库，机器成本较高，而我们机器资源很有限，此外 SnappyData 的计算是基于 JVM 的，会有 GC 问题，影响查询稳定性。
-- **ClickHouse**：Clickhouse 是一款单机性能十分彪悍的 OLAP 系统，但是当集群加减节点后，系统不能自动感知集群拓扑变化，也不能自动 balance 数据，导致运维成本很高，此外 Clickhouse 也不支持标准 SQL，我们用户接入的成本也很高。
 
 
+4. 易用性
 
+clickhouse 扩所容、节点上下线的问题比较笨重，集群迁移也比较麻烦
 
+doris 做到的比较好，也有 rebalance
 
-两年
 
--  clickhouse 
 
-zookeeper 被替换 
 
-Clickhouse 分布式 优化
 
-raft 一致性协议 zk zab协议
+6. 容错性
 
-Es clickhouse 存储打通
 
-ES 集群
 
-数据自动同步
 
-用户使用 物化视图的优化 
 
-sql改写
+7. 事务，原子性
 
-排序键 调整 
+doris > clickhhouse 
 
-引擎核心作为基础
+clickhouse 是说保证最终一致性，但有时候并不能满足节点最终得到一致性
 
-- 分享越来越多
 
 
+8.语言
 
+doris fe java 编码，管理上会存在GC的情况
 
 
-依赖 metric.xml 读写分离
 
 
 
+9. 聚合场景
 
+Doris中比较独特的聚合函数是Replace函数，这个聚合函数能够保证相同Keys的记录只保留最新的Value，可以借助这个Replace函数来实现点更新。一般OLAP系统的数据都是只支持Append的，但是像电商中交易的退款，广告点击中的无效点击处理，都需要去更新之前写入的单条数据，在Kylin这种没有Relpace函数的系统中我们必须把包含对应更新记录的整个Segment数据全部重刷，但是有了Relpace函数，我们只需要再追加1条新的记录即可。 但是Doris中的Repalce函数有个缺点：无法支持预聚合，就是说只要你的SQL中包含了Repalce函数，即使有其他可以已经预聚合的Sum，Max指标，也必须现场计算。
 
-1. 强悍的向量化查询引擎，特殊即为性能十分有益
-2. 运维方面较为复杂，面临用户管理、扩缩容、配置管理的问题
+为什么Doirs可以支持点更新呢？
 
+Doris的聚合模型：就是一个Column只能有一个预聚合函数，无法设置多个预聚合函数。 不过Doris可以现场计算出其他的聚合函数。 Apache Doris的开发者Review时提到，针对这个问题，Doris还有一种解法：由于Doris支持多表导入的原子更新，所以1个Column需要多个聚合函数时，可以在Doris中建多张表，同一份数据导入时，Doris可以同时原子更新多张Doris表，缺点是多张Doris表的查询路由需要应用层来完成。
 
+Doris中和Kylin的Cuboid等价的概念是RollUp表，Cuboid和RollUp表都可以认为是一种Materialized Views或者Index。Doris的RollUp表和Kylin的Cuboid一样，在查询时不需要显示指定，系统内部会根据查询条件进行路由。 如下图所示：
 
-Clickhouse HA
 
-我们实现了
 
-```
+Doris中RollUp表的路由规则如下：
 
-```
+- 选择包含所有查询列的RollUp表
+- 按照过滤和排序的Column筛选最符合的RollUp表
+- 按照Join的Column筛选最符合的RollUp表
+- 行数最小的
+- 列数最小的
 
 
-
-
-
-域名健康检测
-
-shard skip_unsed_replica
-
-
-
-
-
-
-
-
-
-
-
-Clickhouse AdminServer
-
-
-
-
-
-全局监控
-
-配置及创建system.cluster,
-
-
-
-
-
-
-
-
-
-
-
-机会
-
-
-
-spark batch 
-
-flink stream
-
-clickhouse olap:
-
-
-
-
-
-前面的面试 平面二级部门 谢谢
-
-hr的联系
-
-
-
-clickhouse doris 争议：
 
 
 
