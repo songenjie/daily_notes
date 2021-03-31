@@ -11,6 +11,8 @@ Log、Special、Integration主要用于特殊用途，场景相对有限。Merge
 
 以下重点介绍MergeTree、ReplacingMergeTree、CollapsingMergeTree、VersionedCollapsingMergeTree、SummingMergeTree、AggregatingMergeTree引擎。
 
+
+
 ### MergeTree
 
 MergeTree表引擎主要用于海量数据分析，支持数据分区、存储有序、主键索引、稀疏索引、数据TTL等。MergeTree支持所有ClickHouse SQL语法，但是有些功能与MySQL并不一致，比如在MergeTree中主键并不用于去重，以下通过示例说明。
