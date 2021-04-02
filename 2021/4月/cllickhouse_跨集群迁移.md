@@ -91,7 +91,7 @@ WHERE table = 'app_ge_s13_dim_shop_dept_local'
 
 
 
-#### 4 分区数据量
+#### 3 分区数据量
 
 ```mysql
 select count(*) from app_ge_s13_dim_shop_dept_local where dt='2020-09-16';
@@ -125,7 +125,7 @@ WHERE dt = '2020-09-16'
 
 
 
-##  目标集群
+##  4 目标集群
 
 #### ·1 config.xml   源集群 zookeeper 集群添加
 
