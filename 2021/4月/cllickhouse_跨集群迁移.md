@@ -162,6 +162,35 @@ System restart clickhouse-server*
 ALTER TABLE app_ge_s13_dim_shop_dept_local FETCH PARTITION '2020-09-16'  FROM 'HT0_CK_Pub_01:/clickhouse/tables/pc/app_ge_s13_dim_shop_dept_local/010';
 ```
 
+为什么能够支持 请查看我上一片文章 ，这里主要是副本间通信，默认没有身份验证
+
+```c++
+    //节点之间通信是不需要用户名和密码的
+    if (config().has("interserver_http_credentials"))
+    {
+        String user = config().getString("interserver_http_credentials.user", "");
+        String password = config().getString("interserver_http_credentials.password", "");
+
+        if (user.empty())
+            throw Exception("Configuration parameter interserver_http_credentials user can't be empty", ErrorCodes::NO_ELEMENTS_IN_CONFIG);
+
+        global_context->setInterserverCredentials(user, password);
+    }
+```
+
+
+
+ interserver_http_credentials：在使用Replicated *引擎进行复制期间进行身份验证的用户名和密码。 这些凭据仅用于副本之间的通信，与ClickHouse客户端的凭据无关。 服务器正在检查这些凭据以连接副本，并在连接到其他副本时使用相同的凭据。 因此，对于群集中的所有副本，应将这些凭据设置为相同。默认不使用身份验证。
+
+```xml
+<interserver_http_credentials>
+    <user>admin</user>
+    <password>222</password>
+</interserver_http_credentials>
+```
+
+
+
 操作日志
 
 ```
@@ -224,3 +253,6 @@ FROM app_ge_s13_dim_shop_dept_local
 2. 支持更细力度的 如 fetach part
 3. 目前应该是 不支持相同part 名字落入同一个目前集群，如果支持
 4. 直接支持集群迁移的命令
+
+
+
