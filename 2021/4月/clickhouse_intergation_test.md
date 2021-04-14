@@ -32,3 +32,13 @@ docker run --net=host -it --rm --name clickhouse_integration_tests --privileged 
 
 
 
+
+
+```shell
+./tests/integration/runner --binary /export/home/songenjie/songenjie/ClickHouse/build/programs/clickhouse --library-bridge-binary /export/home/songenjie/songenjie/ClickHouse/build/programs/clickhouse-odbc-bridge  --base-configs-dir /export/home/songenjie/songenjie/ClickHouse/programs/server  test_fetch_partition_from_auxiliary_zookeeper
+```
+
+
+
+
+
