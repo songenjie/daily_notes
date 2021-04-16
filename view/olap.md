@@ -12,6 +12,14 @@ OLAP的优势是基于数据仓库面向主题、集成的、保留历史及不�
 
 
 
+伸缩性 balance
+
+稳定性 raft service
+
+
+
+
+
 ## 2. OLAP引擎的常见操作
 
 ![img](https://pic3.zhimg.com/80/v2-a2f230439e14cff33fa744f4e07c0646_1440w.jpg)
