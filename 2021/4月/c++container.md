@@ -156,3 +156,9 @@ List_impl 内涵了 list_node 和继承 -A(list_node)
 
 list_node 有两个指针 M_next M_prex 所有是8的大小
 
+
+
+
+
+
+
