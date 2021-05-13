@@ -850,6 +850,8 @@ Short column name
 
 
 
+server --config-file=/Users/songenjie/Engine/ClickHouse/master/conf/config2.xml --pid-file=/Users/songenjie/Engine/ClickHouse/master/01/bin/clickhouse-server2.pid --daemon
+
 
 
 
@@ -909,6 +911,21 @@ FROM LEFT_TABLE2 as A
 INNER JOIN RIGHT_TABLE2 as B  ON A.id = B.id
 
 
+-- 原始问题 
+
+CREATE MATERIALIZED VIEW jasong.meterialized_table_3 TO jasong.meterialized_table_storage
+(
+    `day` Date,
+    `id` UInt32,
+    `number` UInt32
+) AS
+SELECT
+    LEFT_TABLE2.day,
+    RIGHT_TABLE2.id,
+    RIGHT_TABLE2.number
+FROM jasong.LEFT_TABLE2
+INNER JOIN jasong.RIGHT_TABLE2 ON LEFT_TABLE2.id = RIGHT_TABLE2.id
+
 CREATE MATERIALIZED VIEW meterialized_table_3 TO meterialized_table_storage AS
 SELECT
     LEFT_TABLE2.day ,
@@ -917,9 +934,38 @@ SELECT
 FROM LEFT_TABLE2
 INNER JOIN RIGHT_TABLE2 ON LEFT_TABLE2.id = RIGHT_TABLE2.id
 
+Received exception from server (version 21.6.1):
+Code: 60. DB::Exception: Received from 127.0.0.1:19000. DB::Exception: Table jasong.meterialized_table_3 (eb1f4ba8-267c-4bb5-863a-3eddc5922b71) doesn't exist.
 
 
-CREATE MATERIALIZED VIEW jasong.meterialized_table_3_6 TO jasong.meterialized_table_storage
+
+Received exception from server (version 21.6.1):
+Code: 16. DB::Exception: Received from 127.0.0.1:18000. DB::Exception: There is no column with name `RIGHT_TABLE2.id` in table jasong.meterialized_table_storage (9974d914-63b8-4f96-86e9-f7d8d393bfb2). There are columns: day, id, number, _part, _part_index, _part_uuid, _partition_id, _sample_factor.
+
+
+SELECT *
+FROM jasong.meterialized_table_storage
+
+Query id: 082d2b5d-ee80-4016-9fc6-5d09c308bde2
+
+┌────────day─┬─id─┬─number─┐
+│ 2021-05-07 │  0 │      0 │
+└────────────┴────┴────────┘
+
+CREATE MATERIALIZED VIEW jasong.meterialized_table_3 TO jasong.meterialized_table_storage
+AS
+SELECT
+    A.day,
+    B.id,
+    B.number
+FROM jasong.LEFT_TABLE2 AS A
+INNER JOIN jasong.RIGHT_TABLE2 AS B ON A.id = B.id
+
+
+
+
+
+CREATE MATERIALIZED VIEW jasong.meterialized_table_3 TO jasong.meterialized_table_storage
 (
     `day` Date,
     `id` UInt32,
@@ -1078,8 +1124,37 @@ INNER JOIN jasong.RIGHT_TABLE2 AS B ON A.id = B.id
 
 只能算是优化了就
 
+
+
 ```sql
-CREATE MATERIALIZED VIEW jasong.meterialized_table_3_7 TO jasong.meterialized_table_storage
+CREATE MATERIALIZED VIEW jasong.meterialized_table_3 TO jasong.meterialized_table_storage AS
+SELECT
+    A.day,
+    B.id,
+    B.number
+FROM LEFT_TABLE2 AS A
+INNER JOIN RIGHT_TABLE2 AS B ON A.id = B.id
+
+
+CREATE MATERIALIZED VIEW meterialized_table_3_5 TO meterialized_table_storage AS
+SELECT
+    A.day,
+    B.id,
+    B.number
+FROM LEFT_TABLE2 AS A
+INNER JOIN RIGHT_TABLE2 AS B ON A.id = B.id
+```
+
+
+
+
+
+
+
+
+
+```sql
+CREATE MATERIALIZED VIEW jasong.meterialized_table_3 TO jasong.meterialized_table_storage
 AS
 SELECT
     A.day ,
@@ -1220,5 +1295,34 @@ INNER JOIN jasong.RIGHT_TABLE2 AS B ON A.id = B.id
             if(identifier.alias.empty() || short_name == column_name)
                 identifier.alias = column_name;
         }
+```
+
+
+
+
+
+
+
+
+
+```
+CREATE MATERIALIZED VIEW jasong.meterialized_table_3_12 TO jasong.meterialized_table_storage AS
+SELECT
+    A.day,
+    B.id,
+    A.id
+FROM jasong.LEFT_TABLE2 AS A
+INNER JOIN jasong.RIGHT_TABLE2 AS B ON A.id = B.id
+
+
+
+
+CREATE MATERIALIZED VIEW jasong.meterialized_table_3_10 TO jasong.meterialized_table_storage AS
+SELECT
+    LEFT_TABLE2.day ,
+    RIGHT_TABLE2.id  ,
+    LEFT_TABLE2.id  AS column
+FROM LEFT_TABLE2 
+INNER JOIN RIGHT_TABLE2  ON LEFT_TABLE2.id = RIGHT_TABLE2.id
 ```
 
