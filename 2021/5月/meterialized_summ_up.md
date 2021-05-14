@@ -67,8 +67,8 @@ Code: 16. DB::Exception: Received from 10.0.0.14:9000. DB::Exception: There is n
 CREATE MATERIALIZED VIEW meterialized_table_3 TO meterialized_table_storage AS
 SELECT
     A.day,
-    B.id,
-    B.number
+    B.number,
+    B.id
 FROM LEFT_TABLE2 AS A
 INNER JOIN RIGHT_TABLE2 AS B ON A.id = B.id
 
@@ -223,6 +223,55 @@ INNER JOIN RIGHT_TABLE2 AS B ON A.id = B.id
 
 - show create  补齐database 修复物化视图字段
 CREATE MATERIALIZED VIEW jasong.meterialized_table_3 TO jasong.meterialized_table_storage
+(
+    `day` Date,
+    `id` UInt32,
+    `number` UInt32
+) AS
+SELECT
+    A.day,
+    B.id,
+    B.number
+FROM jasong.LEFT_TABLE2 AS A
+INNER JOIN jasong.RIGHT_TABLE2 AS B ON A.id = B.id
+
+
+
+
+CREATE MATERIALIZED VIEW jasong.meterialized_table_3_2 TO jasong.meterialized_table_storage AS
+SELECT
+    A.day,
+    B.number,
+    B.id
+FROM jasong.LEFT_TABLE2 AS A
+INNER JOIN jasong.RIGHT_TABLE2 AS B ON A.id = B.id
+
+
+
+
+
+
+CREATE TABLE jasong.meterialized_table_storage2
+(
+    `day` Date,
+    `number` UInt32,
+    `id` UInt32
+)
+ENGINE = MergeTree
+PARTITION BY toYYYYMM(day)
+ORDER BY id
+SETTINGS index_granularity = 8192
+
+
+CREATE MATERIALIZED VIEW jasong.meterialized_table_3_4 TO jasong.meterialized_table_storage2 AS
+SELECT
+    A.day,
+    B.id,
+    B.number
+FROM jasong.LEFT_TABLE2 AS A
+INNER JOIN jasong.RIGHT_TABLE2 AS B ON A.id = B.id
+
+CREATE MATERIALIZED VIEW jasong.meterialized_table_3_5 TO jasong.meterialized_table_storage2
 (
     `day` Date,
     `id` UInt32,
