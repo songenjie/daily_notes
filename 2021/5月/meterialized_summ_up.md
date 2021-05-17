@@ -32,7 +32,7 @@ INNER JOIN jasong.RIGHT_TABLE2 ON LEFT_TABLE2.id = RIGHT_TABLE2.id
 ```
 
 - 插入成功
-- 错误
+- 查询错误
 
 ```sql
 192.168.19.12 :) select * from jasong.meterialized_table_3;
@@ -214,64 +214,15 @@ Query id: 0f3ae532-325b-4419-b265-4ac6b0261cc7
  - 修复 no database create 失败
 CREATE MATERIALIZED VIEW meterialized_table_3 TO meterialized_table_storage AS
 SELECT
-    A.day,
-    B.id,
-    B.number
+    A.day as day ,
+    B.number as number ,
+    B.id  as id
 FROM LEFT_TABLE2 AS A
 INNER JOIN RIGHT_TABLE2 AS B ON A.id = B.id
 
 
 - show create  补齐database 修复物化视图字段
 CREATE MATERIALIZED VIEW jasong.meterialized_table_3 TO jasong.meterialized_table_storage
-(
-    `day` Date,
-    `id` UInt32,
-    `number` UInt32
-) AS
-SELECT
-    A.day,
-    B.id,
-    B.number
-FROM jasong.LEFT_TABLE2 AS A
-INNER JOIN jasong.RIGHT_TABLE2 AS B ON A.id = B.id
-
-
-
-
-CREATE MATERIALIZED VIEW jasong.meterialized_table_3_2 TO jasong.meterialized_table_storage AS
-SELECT
-    A.day,
-    B.number,
-    B.id
-FROM jasong.LEFT_TABLE2 AS A
-INNER JOIN jasong.RIGHT_TABLE2 AS B ON A.id = B.id
-
-
-
-
-
-
-CREATE TABLE jasong.meterialized_table_storage2
-(
-    `day` Date,
-    `number` UInt32,
-    `id` UInt32
-)
-ENGINE = MergeTree
-PARTITION BY toYYYYMM(day)
-ORDER BY id
-SETTINGS index_granularity = 8192
-
-
-CREATE MATERIALIZED VIEW jasong.meterialized_table_3_4 TO jasong.meterialized_table_storage2 AS
-SELECT
-    A.day,
-    B.id,
-    B.number
-FROM jasong.LEFT_TABLE2 AS A
-INNER JOIN jasong.RIGHT_TABLE2 AS B ON A.id = B.id
-
-CREATE MATERIALIZED VIEW jasong.meterialized_table_3_5 TO jasong.meterialized_table_storage2
 (
     `day` Date,
     `id` UInt32,
