@@ -1291,7 +1291,47 @@ replicaJoinedtables
 
 analyze
 
-TreeRewriterResult 设置 source columns
+TreeRewriterResult 设置了source columns
+
+```c++
+TreeRewriterResult::TreeRewriterResult(
+    const NamesAndTypesList & source_columns_,
+    ConstStoragePtr storage_,
+    const StorageMetadataPtr & metadata_snapshot_,
+    bool add_special)
+    : storage(storage_)
+    , metadata_snapshot(metadata_snapshot_)
+    , source_columns(source_columns_)
+{
+    collectSourceColumns(add_special);
+    is_remote_storage = storage && storage->isRemote();
+}
+
+/// Add columns from storage to source_columns list. Deduplicate resulted list.
+/// Special columns are non physical columns, for example ALIAS
+void TreeRewriterResult::collectSourceColumns(bool add_special)
+{
+    if (storage)
+    {
+        const ColumnsDescription & columns = metadata_snapshot->getColumns();
+
+        NamesAndTypesList columns_from_storage;
+        if (storage->supportsSubcolumns())
+            columns_from_storage = add_special ? columns.getAllWithSubcolumns() : columns.getAllPhysicalWithSubcolumns();
+        else
+            columns_from_storage = add_special ? columns.getAll() : columns.getAllPhysical();
+
+        if (source_columns.empty())
+            source_columns.swap(columns_from_storage);
+        else
+            source_columns.insert(source_columns.end(), columns_from_storage.begin(), columns_from_storage.end());
+    }
+
+    source_columns_set = removeDuplicateColumns(source_columns);
+}
+```
+
+
 
 ```c++
 TreeRewriterResultPtr TreeRewriter::analyzeSelect(
@@ -1328,8 +1368,10 @@ TreeRewriterResultPtr TreeRewriter::analyzeSelect(
     {
         //从第二章表RIGHT_LABLE 获取 columns 也就是 id number
         result.analyzed_join->columns_from_joined_table = tables_with_columns[1].columns;
+      //////
         result.analyzed_join->deduplicateAndQualifyColumnNames(
             source_columns_set, tables_with_columns[1].table.getQualifiedNamePrefix());
+    
     }
 
     translateQualifiedNames(query, *select_query, source_columns_set, tables_with_columns);
@@ -1388,6 +1430,10 @@ TreeRewriterResultPtr TreeRewriter::analyzeSelect(
 
 
 
+
+
+
+
 Table join 
 
 result 即为左表
@@ -1398,7 +1444,39 @@ tables_with_columns 位右侧的表
 deduplicateAndQualifyColumnNames
 ```
 
-![image-20210517164229797](image-20210517164229797.png)
+original_name 和 renames 存储了映射关系
+
+他们两个 k v正好相反
+
+我理解这里会在collectJoinedColumns用到 设置原声columns
+
+Result.columns 是最终会使用的 当前建表的columns
+
+![image-20210517172002792](image-20210517172002792.png)
+
+![image-20210517172605999](image-20210517172605999.png)
+
+
+
+
+
+NameSet source_colum_set 这里不保证顺序
+
+```c++
+using NameSet = std::unordered_set<std::string>;
+```
+
+
+
+
+
+```
+translateQualifiedNames(query, *select_query, source_columns_set, tables_with_columns);
+```
+
+Query,select_query 理论上是相同的
+
+
 
 
 

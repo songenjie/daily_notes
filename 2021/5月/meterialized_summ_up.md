@@ -163,8 +163,8 @@ Code: 16. DB::Exception: Received from 10.0.0.14:9000. DB::Exception: There is n
 CREATE MATERIALIZED VIEW meterialized_table_3 TO meterialized_table_storage AS
 SELECT
     LEFT_TABLE2.day,
-    RIGHT_TABLE2.id,
-    RIGHT_TABLE2.number
+    RIGHT_TABLE2.id as id ,
+    RIGHT_TABLE2.number as number
 FROM LEFT_TABLE2
 INNER JOIN RIGHT_TABLE2 ON LEFT_TABLE2.id = RIGHT_TABLE2.id
 
@@ -216,7 +216,7 @@ CREATE MATERIALIZED VIEW meterialized_table_3 TO meterialized_table_storage AS
 SELECT
     A.day as day ,
     B.number as number ,
-    B.id  as id
+    B.id as id
 FROM LEFT_TABLE2 AS A
 INNER JOIN RIGHT_TABLE2 AS B ON A.id = B.id
 

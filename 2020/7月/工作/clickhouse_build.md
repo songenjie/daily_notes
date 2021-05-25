@@ -1,6 +1,6 @@
 # 1 developer tools
 
-```
+```shell
 yum groupinstall "Development Tools"
 
 yum install glibc-static libstdc++-static
@@ -11,28 +11,29 @@ yum install glibc-static libstdc++-static
 
 
 
-# 2 gcc 9.2
+# 2 gcc 10.2
 
-```
-export GCC_VERSION=9.2.0
+```shell
+export GCC_VERSION=10.2.0
 
 wget https://mirrors.ustc.edu.cn/gnu/gcc/gcc-${GCC_VERSION}/gcc-${GCC_VERSION}.tar.gz
 
 tar xzvf gcc-${GCC_VERSION}.tar.gz
+
+cd gcc-${GCC_VERSION}
 
 vim ./contrib/download_prerequisites 将数据元 ftp -> https(这里下载可能很慢,可以搜下，后面我上传到oss)
 
 ./contrib/download_prerequisites 这里可能会有点慢 数据源问题
 
 
-
-构建build 目录，个人习惯和代码同级别，隔离
+cd ..
 
 mkdir gcc-${GCC_VERSION}-build
 
 cd gcc-${GCC_VERSION}-build
 
-../gcc-${GCC_VERSION}/configure --prefix=/usr/local/gcc9 --enable-languages=c,c++  --disable-multilib
+../gcc-${GCC_VERSION}/configure --prefix=/usr/local/gcc10 --enable-languages=c,c++  --disable-multilib
 
 make -j $(nproc)
 
@@ -46,13 +47,17 @@ rm -f /usr/bin/gcc
 
 rm -f /usr/bin/g++
 
-ln -s /usr/local/gcc9/bin/gcc /usr/bin/gcc
+rm -f /usr/bin/gcc-10
 
-ln -s /usr/local/gcc9/bin/gcc /usr/bin/gcc-9
+rm -f /usr/bin/g++-10
 
-ln -s /usr/local/gcc9/bin/g++ /usr/bin/g++
+ln -s /usr/local/gcc10/bin/gcc /usr/bin/gcc
 
-ln -s /usr/local/gcc9/bin/g++ /usr/bin/g++-9
+ln -s /usr/local/gcc10/bin/gcc /usr/bin/gcc-10
+
+ln -s /usr/local/gcc10/bin/g++ /usr/bin/g++
+
+ln -s /usr/local/gcc10/bin/g++ /usr/bin/g++-10
 
 
 
@@ -71,16 +76,37 @@ gcc --version
 
 #  3 cmake
 
-```
-wget https://cmake.org/files/v3.12/cmake-3.12.0.tar.gz
+```shell
+wget https://cmake.org/files/v3.18/cmake-3.18.0.tar.gz
 
-tar -zxvf cmake-3.12.0.tar.gz
+tar -zxvf cmake-3.18.0.tar.gz
 
-cd cmake-3.12.0
+cd cmake-3.18.0
 
 ./bootstrap --prefix=/usr/local
 
-make
+``
+如果
+失败
+/root/cmake-3.18.0/Bootstrap.cmk/cmake: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.26' not found (required by /root/cmake-3.18.0/Bootstrap.cmk/cmake)
+/root/cmake-3.18.0/Bootstrap.cmk/cmake: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found (required by /root/cmake-3.18.0/Bootstrap.cmk/cmake)
+/root/cmake-3.18.0/Bootstrap.cmk/cmake: /lib64/libstdc++.so.6: version `GLIBCXX_3.4.21' not found (required by /root/cmake-3.18.0/Bootstrap.cmk/cmake)
+
+ find . -name 'libstdc++.so.6'
+./root/gcc-10.2.0-build/x86_64-pc-linux-gnu/libstdc++-v3/src/.libs/libstdc++.so.6
+./root/gcc-10.2.0-build/prev-x86_64-pc-linux-gnu/libstdc++-v3/src/.libs/libstdc++.so.6
+./root/gcc-10.2.0-build/stage1-x86_64-pc-linux-gnu/libstdc++-v3/src/.libs/libstdc++.so.6
+./usr/lib64/libstdc++.so.6
+./usr/local/gcc10/lib64/libstdc++.so.6
+./usr/1.2-compat/lib64/libstdc++.so.6
+./usr/1.2-compat/lib/libstdc++.so.6
+./usr/lib/libstdc++.so.6
+
+ strings ./root/gcc-10.2.0-build/x86_64-pc-linux-gnu/libstdc++-v3/src/.libs/libstdc++.so.6 |grep GLIBCXX_3.4.20
+ 
+``
+
+make -j $(nproc)
 
 make install
 
@@ -131,3 +157,6 @@ make -j $(nproc)
 完成
 ```
 
+
+
+5.05

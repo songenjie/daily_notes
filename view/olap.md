@@ -104,6 +104,8 @@ ROLAP 不需要进行数据预处理 ( pre-processing )，因此查询灵活，�
 
 ![img](https://pic2.zhimg.com/80/v2-0b8c06bfaaea592074587695bcfe30d1_1440w.jpg)
 
+![图片](https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe94AiaMJnXXEZJ20dZUvVA5R5iba3nw7pbhdyXNCFaTju3peyT41pzjKS3XH0Qial0YHZcAYr84IiaPndg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+
 【原图来自Apache Doris官方介绍PPT】
 
 - Scatter-Gather执行模型：相当于MapReduce中的一趟Map和Reduce，没有多轮的迭代，而且中间计算结果往往存储在内存中，通过网络直接交换。Elasticsearch、Druid、Kylin都是此模型。

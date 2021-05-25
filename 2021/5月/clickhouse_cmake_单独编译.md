@@ -34,3 +34,4 @@ https://github.com/ClickHouse/ClickHouse/issues/17624
 
 内存不够了还
 
+cmake ../ -DUSE_STATIC_LIBRARIES=0 -DSPLIT_SHARED_LIBRARIES=1
