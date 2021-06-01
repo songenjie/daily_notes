@@ -665,6 +665,7 @@ CreateTable -> setProperties
 DB::InterpreterCreateQuery::setProperties(DB::ASTCreateQuery&) const InterpreterCreateQuery.cpp:573
 DB::InterpreterCreateQuery::createTable(DB::ASTCreateQuery&) InterpreterCreateQuery.cpp:932
 DB::InterpreterCreateQuery::execute() InterpreterCreateQuery.cpp:1274
+  
 DB::executeQueryImpl(char const*, char const*, std::__1::shared_ptr<DB::Context>, bool, DB::QueryProcessingStage::Enum, bool, DB::ReadBuffer*) executeQuery.cpp:561
 DB::executeQuery(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::shared_ptr<DB::Context>, bool, DB::QueryProcessingStage::Enum, bool) executeQuery.cpp:919
 DB::TCPHandler::runImpl() TCPHandler.cpp:312

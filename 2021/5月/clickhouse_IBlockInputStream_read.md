@@ -1,6 +1,6 @@
 
 
-
+![preview](https://pic2.zhimg.com/v2-b2836c9e722f3c9aca9df6230ac2fe85_r.jpg)
 
 ```c++
 /// It's safe to access children without mutex as long as these methods are called before first call to `read()` or `readPrefix()`
