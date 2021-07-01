@@ -85,3 +85,53 @@ size_t CompressedReadBufferBase::readCompressedData(size_t & size_decompressed, 
 
 
 ![企业微信截图_16221203065408](企业微信截图_16221203065408.png)
+
+
+
+
+
+```c++
+DB::MergeTreeRangeReader::DelayedStream::readRows(std::__1::vector<COW<DB::IColumn>::immutable_ptr<DB::IColumn>, std::__1::allocator<COW<DB::IColumn>::immutable_ptr<DB::IColumn> > >&, unsigned long) MergeTreeRangeReader.cpp:73
+DB::MergeTreeRangeReader::DelayedStream::finalize(std::__1::vector<COW<DB::IColumn>::immutable_ptr<DB::IColumn>, std::__1::allocator<COW<DB::IColumn>::immutable_ptr<DB::IColumn> > >&) MergeTreeRangeReader.cpp:148
+DB::MergeTreeRangeReader::Stream::finalize(std::__1::vector<COW<DB::IColumn>::immutable_ptr<DB::IColumn>, std::__1::allocator<COW<DB::IColumn>::immutable_ptr<DB::IColumn> > >&) MergeTreeRangeReader.cpp:259
+DB::MergeTreeRangeReader::startReadingChain(unsigned long, std::__1::deque<DB::MarkRange, std::__1::allocator<DB::MarkRange> >&) MergeTreeRangeReader.cpp:764
+DB::MergeTreeRangeReader::read(unsigned long, std::__1::deque<DB::MarkRange, std::__1::allocator<DB::MarkRange> >&) MergeTreeRangeReader.cpp:715
+DB::MergeTreeBaseSelectProcessor::readFromPartImpl() MergeTreeBaseSelectProcessor.cpp:148
+DB::MergeTreeBaseSelectProcessor::readFromPart() MergeTreeBaseSelectProcessor.cpp:196
+DB::MergeTreeBaseSelectProcessor::generate() MergeTreeBaseSelectProcessor.cpp:59
+DB::ISource::tryGenerate() ISource.cpp:79
+DB::ISource::work() ISource.cpp:53
+DB::SourceWithProgress::work() SourceWithProgress.cpp:36
+DB::executeJob(DB::IProcessor*) PipelineExecutor.cpp:80
+DB::PipelineExecutor::addJob(DB::ExecutingGraph::Node*)::$_0::operator()() const PipelineExecutor.cpp:97
+decltype(std::__1::forward<DB::PipelineExecutor::addJob(DB::ExecutingGraph::Node*)::$_0&>(fp)()) std::__1::__invoke<DB::PipelineExecutor::addJob(DB::ExecutingGraph::Node*)::$_0&>(DB::PipelineExecutor::addJob(DB::ExecutingGraph::Node*)::$_0&) type_traits:3676
+void std::__1::__invoke_void_return_wrapper<void>::__call<DB::PipelineExecutor::addJob(DB::ExecutingGraph::Node*)::$_0&>(DB::PipelineExecutor::addJob(DB::ExecutingGraph::Node*)::$_0&) __functional_base:348
+std::__1::__function::__default_alloc_func<DB::PipelineExecutor::addJob(DB::ExecutingGraph::Node*)::$_0, void ()>::operator()() functional:1608
+void std::__1::__function::__policy_invoker<void ()>::__call_impl<std::__1::__function::__default_alloc_func<DB::PipelineExecutor::addJob(DB::ExecutingGraph::Node*)::$_0, void ()> >(std::__1::__function::__policy_storage const*) functional:2089
+std::__1::__function::__policy_func<void ()>::operator()() const functional:2221
+std::__1::function<void ()>::operator()() const functional:2560
+DB::PipelineExecutor::executeStepImpl(unsigned long, unsigned long, std::__1::atomic<bool>*) PipelineExecutor.cpp:586
+DB::PipelineExecutor::executeSingleThread(unsigned long, unsigned long) PipelineExecutor.cpp:474
+DB::PipelineExecutor::executeImpl(unsigned long) PipelineExecutor.cpp:813
+DB::PipelineExecutor::execute(unsigned long) PipelineExecutor.cpp:396
+DB::threadFunction(DB::PullingAsyncPipelineExecutor::Data&, std::__1::shared_ptr<DB::ThreadGroupStatus>, unsigned long) PullingAsyncPipelineExecutor.cpp:80
+DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0::operator()() const PullingAsyncPipelineExecutor.cpp:107
+decltype(std::__1::forward<DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&>(fp)()) std::__1::__invoke_constexpr<DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&>(DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&) type_traits:3682
+decltype(auto) std::__1::__apply_tuple_impl<DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&, std::__1::tuple<>&>(DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&, std::__1::tuple<>&, std::__1::__tuple_indices<>) tuple:1415
+decltype(auto) std::__1::apply<DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&, std::__1::tuple<>&>(DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&, std::__1::tuple<>&) tuple:1424
+ThreadFromGlobalPool::ThreadFromGlobalPool<DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0>(DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&&)::'lambda'()::operator()() ThreadPool.h:178
+decltype(std::__1::forward<DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0>(fp)()) std::__1::__invoke<ThreadFromGlobalPool::ThreadFromGlobalPool<DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0>(DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&&)::'lambda'()&>(DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&&) type_traits:3676
+void std::__1::__invoke_void_return_wrapper<void>::__call<ThreadFromGlobalPool::ThreadFromGlobalPool<DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0>(DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&&)::'lambda'()&>(ThreadFromGlobalPool::ThreadFromGlobalPool<DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0>(DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&&)::'lambda'()&) __functional_base:348
+std::__1::__function::__default_alloc_func<ThreadFromGlobalPool::ThreadFromGlobalPool<DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0>(DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&&)::'lambda'(), void ()>::operator()() functional:1608
+void std::__1::__function::__policy_invoker<void ()>::__call_impl<std::__1::__function::__default_alloc_func<ThreadFromGlobalPool::ThreadFromGlobalPool<DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0>(DB::PullingAsyncPipelineExecutor::pull(DB::Chunk&, unsigned long long)::$_0&&)::'lambda'(), void ()> >(std::__1::__function::__policy_storage const*) functional:2089
+std::__1::__function::__policy_func<void ()>::operator()() const functional:2221
+std::__1::function<void ()>::operator()() const functional:2560
+ThreadPoolImpl<std::__1::thread>::worker(std::__1::__list_iterator<std::__1::thread, void*>) ThreadPool.cpp:247
+void ThreadPoolImpl<std::__1::thread>::scheduleImpl<void>(std::__1::function<void ()>, int, std::__1::optional<unsigned long long>)::'lambda1'()::operator()() const ThreadPool.cpp:124
+decltype(std::__1::forward<void>(fp)()) std::__1::__invoke<void ThreadPoolImpl<std::__1::thread>::scheduleImpl<void>(std::__1::function<void ()>, int, std::__1::optional<unsigned long long>)::'lambda1'()>(void&&) type_traits:3676
+void std::__1::__thread_execute<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct> >, void ThreadPoolImpl<std::__1::thread>::scheduleImpl<void>(std::__1::function<void ()>, int, std::__1::optional<unsigned long long>)::'lambda1'()>(std::__1::tuple<void, void ThreadPoolImpl<std::__1::thread>::scheduleImpl<void>(std::__1::function<void ()>, int, std::__1::optional<unsigned long long>)::'lambda1'()>&, std::__1::__tuple_indices<>) thread:280
+void* std::__1::__thread_proxy<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct> >, void ThreadPoolImpl<std::__1::thread>::scheduleImpl<void>(std::__1::function<void ()>, int, std::__1::optional<unsigned long long>)::'lambda1'()> >(void*) thread:291
+_pthread_start 0x00007fff2037f950
+thread_start 0x00007fff2037b47b
+```
+

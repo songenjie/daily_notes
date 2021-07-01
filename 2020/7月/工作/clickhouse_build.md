@@ -59,8 +59,6 @@ ln -s /usr/local/gcc10/bin/g++ /usr/bin/g++
 
 ln -s /usr/local/gcc10/bin/g++ /usr/bin/g++-10
 
-
-
 export CC=gcc
 
 export CXX=g++
@@ -71,6 +69,16 @@ g++ --version
 
 gcc --version
 ```
+
+
+
+
+
+```shell
+yum install openssl openssl-devel
+```
+
+
 
 
 
