@@ -51,16 +51,24 @@ Join是数据库查询永远绕不开的话题，传统查询SQL技术总体可�
 
 ![broadcast hash join和sort merge join2](https://res-static.hc-cdn.cn/fms/img/a0ffa9918653edf709c5b05b4e8502cf1603447822699.png)
 
+![在这里插入图片描述](https://www.pianshen.com/images/234/d24a4988ffafaad1e78da41d0ea1c082.png)
+
 ​    3.SparkSQL规定broadcast hash join执行的基本条件为被广播小表必须小于参数spark.sql.autoBroadcastJoinThreshold，默认为10M。
 
 ## shuffle hash join
 
-在大数据条件下如果一张表很小，执行join操作最优的选择无疑是broadcast hash join，效率最高。但是一旦小表数据量增大，广播所需内存、带宽等资源必然就会太大，broadcast hash join就不再是最优方案。此时可以按照join key进行分区，根据key相同必然分区相同的原理，就可以将大表join分而治之，划分为很多小表的join，充分利用集群资源并行化。如下图所示，shuffle hash join也可以分为两步：
+在大数据条件下如果一张表很小，执行join操作最优的选择无疑是broadcast hash join，效率最高。
+
+但是一旦小表数据量增大，广播所需内存、带宽等资源必然就会太大，broadcast hash join就不再是最优方案。
+
+此时可以按照join key进行分区，根据key相同必然分区相同的原理，就可以将大表join分而治之，划分为很多小表的join，充分利用集群资源并行化。如下图所示，shuffle hash join也可以分为两步：
 
 1. shuffle阶段：分别将两个表按照join key进行分区，将相同join key的记录重分布到同一节点，两张表的数据会被重分布到集群中所有节点。这个过程称为shuffle。
 2. hash join阶段：每个分区节点上的数据单独执行单机hash join算法。
 
 ![broadcast hash join和sort merge join3](https://res-static.hc-cdn.cn/fms/img/67c8fa0746a0a7694b49614e8e27aacc1603447822699.png)
+
+![在这里插入图片描述](https://www.pianshen.com/images/897/1f64def696b75da43c2b1baac837b9c1.png)
 
 看到这里，可以初步总结出来如果两张小表join可以直接使用单机版hash join；如果一张大表join一张极小表，可以选择broadcast hash join算法；而如果是一张大表join一张小表，则可以选择shuffle hash join算法；那如果是两张大表进行join呢？
 
@@ -69,6 +77,8 @@ Join是数据库查询永远绕不开的话题，传统查询SQL技术总体可�
 SparkSQL对两张大表join采用了全新的算法－sort-merge join，如下图所示，整个过程分为三个步骤：
 
 ![broadcast hash join和sort merge join4](https://res-static.hc-cdn.cn/fms/img/746a7ba985f3463e88f4c1fb4926829a1603447822699.png)
+
+![在这里插入图片描述](https://www.pianshen.com/images/538/7ab21daa31169dc0d5cf8dd672f45a42.png)
 
 1. shuffle阶段：将两张大表根据join key进行重新分区，两张表数据会分布到整个集群，以便分布式并行处理。
 2. sort阶段：对单个分区节点的两表数据，分别进行排序。
@@ -81,3 +91,4 @@ SparkSQL对两张大表join采用了全新的算法－sort-merge join，如下�
 # 总结
 
 Join操作是数据库和大数据计算中的高级特性，因为其独特的复杂性，很少有同学能够讲清楚其中的原理。本文试图带大家真正走进Join的世界，了解常用的几种Join算法以及各自的适用场景。
+
