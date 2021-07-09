@@ -47,7 +47,7 @@ GROUP BY userid, day
 
 
 
-CREATE table LEFT_TABLE (
+CREATE table LEFT_TABLE2 (
   day Date,
   id UInt32,
   number UInt32
@@ -56,7 +56,7 @@ PARTITION BY toYYYYMM(day)
 ORDER BY id;
 
 
-CREATE table RIGHT_TABLE (
+CREATE table RIGHT_TABLE2 (
   id UInt32,
   number UInt32
 ) ENGINE=MergeTree

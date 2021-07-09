@@ -1,3 +1,126 @@
+```sql
+EXPLAIN AST
+CREATE MATERIALIZED VIEW meterialized_table_3 TO meterialized_table_storage AS
+SELECT
+    A.day AS day,
+    B.number AS number,
+    B.id AS id
+FROM LEFT_TABLE2 AS A
+INNER JOIN RIGHT_TABLE2 AS B ON A.id = B.id
+
+Query id: 1e42e894-f6ed-4292-871a-2c1eddf11b4d
+
+┌─explain────────────────────────────────────────┐
+│ CreateQuery  meterialized_table_3 (children 1) │
+│  SelectWithUnionQuery (children 1)             │
+│   ExpressionList (children 1)                  │
+│    SelectQuery (children 2)                    │
+│     ExpressionList (children 3)                │
+│      Identifier A.day (alias day)              │
+│      Identifier B.number (alias number)        │
+│      Identifier B.id (alias id)                │
+│     TablesInSelectQuery (children 2)           │
+│      TablesInSelectQueryElement (children 1)   │
+│       TableExpression (children 1)             │
+│        Identifier LEFT_TABLE2 (alias A)        │
+│      TablesInSelectQueryElement (children 2)   │
+│       TableExpression (children 1)             │
+│        Identifier RIGHT_TABLE2 (alias B)       │
+│       TableJoin (children 1)                   │
+│        Function equals (children 1)            │
+│         ExpressionList (children 2)            │
+│          Identifier A.id                       │
+│          Identifier B.id                       │
+└────────────────────────────────────────────────┘
+
+20 rows in set. Elapsed: 0.002 sec. 
+
+VM-0-130-centos :) explain ast  SELECT　    A.day AS day,　    B.id AS id,　    B.number AS number　FROM LEFT_TABLE2 AS A　INNER JOIN RIGHT_TABLE2 AS B ON A.id = B.id;
+
+EXPLAIN AST
+SELECT
+    A.day AS day,
+    B.id AS id,
+    B.number AS number
+FROM LEFT_TABLE2 AS A
+INNER JOIN RIGHT_TABLE2 AS B ON A.id = B.id
+
+Query id: 66dec5f9-07c8-48b9-bc56-a8e76b6548f0
+
+┌─explain─────────────────────────────────────┐
+│ SelectWithUnionQuery (children 1)           │
+│  ExpressionList (children 1)                │
+│   SelectQuery (children 2)                  │
+│    ExpressionList (children 3)              │
+│     Identifier A.day (alias day)            │
+│     Identifier B.id (alias id)              │
+│     Identifier B.number (alias number)      │
+│    TablesInSelectQuery (children 2)         │
+│     TablesInSelectQueryElement (children 1) │
+│      TableExpression (children 1)           │
+│       Identifier LEFT_TABLE2 (alias A)      │
+│     TablesInSelectQueryElement (children 2) │
+│      TableExpression (children 1)           │
+│       Identifier RIGHT_TABLE2 (alias B)     │
+│      TableJoin (children 1)                 │
+│       Function equals (children 1)          │
+│        ExpressionList (children 2)          │
+│         Identifier A.id                     │
+│         Identifier B.id                     │
+└─────────────────────────────────────────────┘
+
+19 rows in set. Elapsed: 0.002 sec. 
+
+
+
+EXPLAIN AST
+CREATE TABLE RIGHT_TABLE2
+(
+    `id` UInt32,
+    `number` UInt32
+)
+ENGINE = MergeTree
+PARTITION BY tuple()
+ORDER BY id
+
+Query id: 3477f0c7-b77c-434d-9e95-cc0230469c58
+
+┌─explain──────────────────────────────────┐
+│ CreateQuery  RIGHT_TABLE2 (children 2)   │
+│  Columns definition (children 1)         │
+│   ExpressionList (children 2)            │
+│    ColumnDeclaration id (children 1)     │
+│     Function UInt32                      │
+│    ColumnDeclaration number (children 1) │
+│     Function UInt32                      │
+│  Storage definition (children 3)         │
+│   Function MergeTree                     │
+│   Function tuple (children 1)            │
+│    ExpressionList                        │
+│   Identifier id                          │
+└──────────────────────────────────────────┘
+
+12 rows in set. Elapsed: 0.002 sec.
+```
+
+
+
+跟传统数据的，ClickHouse AST 语法数的生成也是非常的抽象
+
+创建物化视图实际是包含了 创建一个MergeTree Table ast 和 SELECT ast 的
+
+所以我们这里统一用 创建一个物化视图的代码跟踪来跟大家分享一个ClickHouse AST 是如何构造的
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -265,7 +388,7 @@ SELECT
     B.number AS number,
     B.id AS id
 FROM LEFT_TABLE2 AS A
-INNER JOIN RIGHT_TABLE2 AS B ON A.id = B.id=
+INNER JOIN RIGHT_TABLE2 AS B ON A.id = B.id;
 ```
 
 ![image-20210518111417067](image-20210518111417067.png)
