@@ -1,10 +1,28 @@
 这篇论文主要对比了向量化和codegen，这两种不同的OLAP query engine实现，在性能表现的差异，进行了详细的benchmark，并对结果做了深入的解读。
 
-在过去query engine实现用火山模型（Volcano-style iteration model,），是因为磁盘IO的瓶颈，计算引擎的执行占比并不高，但是现今cpu逐渐成为瓶颈的情况下，业界对volcano-style的改进方案，走了两派，向量化的代表是VectorWise（荷兰CWI研究院08年开发的MonetDB/X100, 后续并入VectorWise），而data-centric code generation的代表是HyPer。使用向量化的工业界系统包括DB2 BLU，SQL server列存和QuickStep，codegen则为spark和peloton。
 
-实现方式上，火山模型是pull-based，每个算子实现一个next，输入是一个block，向量化的前提批量接口，然后vector-at-a-time的处理一批类型相同的数据，执行简单的操作。codegen，是push-based的接口，要实现produce和consume，在query plan tree上做类似于深度优先搜索的调用方式，codegen出来的代码都是要有特化类型的，把多个算子压缩成一个loop。
+
+在过去query engine实现用火山模型（Volcano-style iteration model,），是因为磁盘IO的瓶颈，计算引擎的执行占比并不高，但是现今cpu逐渐成为瓶颈的情况下，业界对volcano-style的改进方案，走了两派，
+
+
+
+向量化的代表是VectorWise（荷兰CWI研究院08年开发的MonetDB/X100, 后续并入VectorWise），
+
+而data-centric code generation的代表是HyPer。使用向量化的工业界系统包括DB2 BLU，SQL server列存和QuickStep，codegen则为spark和peloton。
+
+
+
+实现方式上，火山模型是pull-based，每个算子实现一个next，输入是一个block，向量化的前提批量接口，然后vector-at-a-time的处理一批类型相同的数据，执行简单的操作。
+
+
+
+codegen，是push-based的接口，要实现produce和consume，在query plan tree上做类似于深度优先搜索的调用方式，codegen出来的代码都是要有特化类型的，把多个算子压缩成一个loop。
+
+
 
 学术界没有针对这两种实现方式的比较，因为各个系统的实现算法、数据结构、并行化方式都不尽相同，很难对齐，为了屏蔽这些不同，公平的评测向量化和codegen，论文实现了两个简单的系统，codegen叫做Typer，向量叫做Tectorwise（后文简称TW）。
+
+
 
 向量化的好处在于，以计算为中心，批量处理，充分利用计算局部性和数据局部性的特性，针对某些算子实现特定的向量化算法，cache friendly，更可以利用CPU super scalar流水线，out-of-order等特性，同时具备使用SIMD指令加速的条件。劣势在于，需要物化保存中间临时结果数据，IPC指令更多。
 
